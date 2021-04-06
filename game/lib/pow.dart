@@ -5,8 +5,8 @@ class Pow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.yellow.shade700,
-      width: 60,
-      height: 60,
+      width: 360,
+      height: 360,
       child: Image.asset(
         'assets/images/roberto.png',
       ),

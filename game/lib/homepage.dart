@@ -41,7 +41,39 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Pow(),
                   color: Colors.yellow.shade700,
                 ),
-              ))
+              )),
+          Row(
+            children: [
+              TextButton(
+                child: Text('Alimetar'),
+                style: TextButton.styleFrom(primary: Colors.green),
+                onPressed: () {
+                  setState(() {});
+                },
+              ),
+              TextButton(
+                child: Text('Dormir'),
+                style: TextButton.styleFrom(primary: Colors.green),
+                onPressed: () {
+                  setState(() {});
+                },
+              ),
+              TextButton(
+                child: Text('Brincar'),
+                style: TextButton.styleFrom(primary: Colors.green),
+                onPressed: () {
+                  setState(() {});
+                },
+              ),
+              TextButton(
+                child: Text('Meus pets'),
+                style: TextButton.styleFrom(primary: Colors.green),
+                onPressed: () {
+                  setState(() {});
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );
