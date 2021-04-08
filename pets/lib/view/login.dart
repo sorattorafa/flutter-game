@@ -70,8 +70,8 @@ class FirstScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           if (!_formKey.currentState.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Processing Data')));
+                          //  ScaffoldMessenger.of(context).showSnackBar(
+                         //       SnackBar(content: Text('Processing Data')));
                           } else {
                             Navigator.pushNamed(context, '/second');
                           }
