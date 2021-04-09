@@ -1,19 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:pets/widgets/form-field.dart';
 
-class FirstScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+class FirstScreen extends StatefulWidget {
   static const IconData pets = IconData(0xe90e, fontFamily: 'MaterialIcons');
+
+  @override
+  _FirstScreenState createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  final _formKey = GlobalKey<FormState>();
+  String email = '';
+  TextEditingController emailController = TextEditingController(text: '');
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(
-            pets,
+            FirstScreen.pets,
             color: Colors.black,
             size: 20.0,
-            key: Key('dsdas'),
+            key: Key('icon2'),
           ),
           SizedBox(width: 5),
           Text(
@@ -22,10 +40,10 @@ class FirstScreen extends StatelessWidget {
           ),
           SizedBox(width: 5),
           Icon(
-            pets,
+            FirstScreen.pets,
             color: Colors.black,
             size: 20.0,
-            key: Key('dsas'),
+            key: Key('icon1'),
           ),
         ]),
       ),
@@ -54,12 +72,17 @@ class FirstScreen extends StatelessWidget {
                   children: <Widget>[
                     FormItem(
                       formFieldName: 'email',
+                      controller: emailController,
                       suffix: Visibility(
                         visible: true,
                         child: IconButton(
                           icon: const Icon(Icons.cancel),
                           color: const Color(0xFF006AEC),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              emailController = TextEditingController(text: '');
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -70,10 +93,10 @@ class FirstScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           if (!_formKey.currentState.validate()) {
-                          //  ScaffoldMessenger.of(context).showSnackBar(
-                         //       SnackBar(content: Text('Processing Data')));
+                            //  ScaffoldMessenger.of(context).showSnackBar(
+                            //       SnackBar(content: Text('Processing Data')));
                           } else {
-                            Navigator.pushNamed(context, '/second');
+                            Navigator.pushReplacementNamed(context, '/second');
                           }
                         },
                         child: Text('Login'),
