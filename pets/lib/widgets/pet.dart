@@ -5,8 +5,8 @@ class PetSick extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      height: 360,
-      child: Icon(Icons.sick, size: 360, color: Colors.red),
+      height: 250,
+      child: Icon(Icons.sick, size: 250, color: Colors.red),
     );
   }
 }
