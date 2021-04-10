@@ -77,7 +77,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         visible: true,
                         child: IconButton(
                           icon: const Icon(Icons.cancel),
-                          color: const Color(0xFF006AEC),
+                          color: Colors.purple.shade500,
                           onPressed: () {
                             setState(() {
                               emailController = TextEditingController(text: '');

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pets/widgets/pet.dart';
 
-class Pet extends StatefulWidget {
+class PetInfos extends StatefulWidget {
   @override
-  _PetState createState() => _PetState();
+  _PetInfosState createState() => _PetInfosState();
 }
 
-class _PetState extends State<Pet> {
+class _PetInfosState extends State<PetInfos> {
   int selectedIndex = 0;
   @override
   void initState() {
@@ -20,15 +20,20 @@ class _PetState extends State<Pet> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            width: 360,
-            height: 360,
-            child: Icon(Icons.sick, size: 360, color: Colors.blue),
-          ),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pet: numero 1'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              width: 360,
+              height: 360,
+              child: Pet(state: Icons.sick, color: Colors.red, size: 250),
+            ),
+          ],
+        ),
       ),
     );
   }

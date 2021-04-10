@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pets/view/pet.dart';
+import 'package:pets/view/profile.dart';
 import 'package:pets/view/pets-list.dart';
 
 class SecondScreen extends StatefulWidget {
@@ -30,8 +30,8 @@ class _SecondScreenState extends State<SecondScreen> {
     const IconData pets = IconData(0xe90e, fontFamily: 'MaterialIcons');
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
-        getBottomBarItem('Pet', Icons.home),
         getBottomBarItem('Meus pets', pets),
+        getBottomBarItem('Perfil', Icons.person),
       ],
       currentIndex: selectedIndex,
       onTap: (value) {
@@ -47,10 +47,10 @@ class _SecondScreenState extends State<SecondScreen> {
 
   Widget renderScreens(int selectedIndex) {
     switch (selectedIndex) {
-      case 1:
-        return PetList();
       case 0:
-        return Pet();
+        return PetList();
+      case 1:
+        return Profile();
       default:
         return Container();
     }

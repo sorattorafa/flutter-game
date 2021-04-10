@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pets/view/farm.dart';
 import 'package:pets/view/login.dart';
+import 'package:pets/view/pet.dart';
 
 void main() {
   runApp(PetsApp());
@@ -24,11 +25,12 @@ class _PetsAppState extends State<PetsApp> {
       routes: {
         '/': (context) => FirstScreen(),
         '/second': (context) => SecondScreen(),
+        '/petview': (context) => PetInfos(),
       },
       theme: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        primaryColor: const Color(0xFF005CC5),
+        primarySwatch: Colors.deepPurple,
+        primaryColor: Colors.purple.shade500,
         scaffoldBackgroundColor: Colors.white,
         primaryTextTheme: TextTheme(
           headline6: TextStyle(color: Colors.grey[800]),
@@ -49,17 +51,17 @@ class _PetsAppState extends State<PetsApp> {
           fillColor: Color(0x0A000000),
         ),
         appBarTheme: AppBarTheme(
-          color: const Color(0xFF006AEC),
+          color: Colors.purple.shade500,
           brightness: Brightness.light,
           iconTheme: IconThemeData(color: Colors.grey[800]),
           elevation: 2.5,
         ),
-        buttonColor: const Color(0xFF006AEC),
+        buttonColor: Colors.purple.shade500,
         buttonTheme: ButtonThemeData(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(22.0),
           ),
-          buttonColor: const Color(0xFF006AEC),
+          buttonColor: Colors.purple.shade500,
         ),
       ),
     );
