@@ -14,8 +14,8 @@ class Pet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
-      height: 250,
+      width: 150,
+      height: 150,
       child: Icon(state, size: size, color: color),
     );
   }

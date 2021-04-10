@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pets/models/pet.dart';
 import 'package:pets/widgets/adaptative-refresh-indicator.dart';
 import 'package:pets/widgets/pet.dart';
 import 'package:pets/widgets/refresh-scroll-physics.dart';
@@ -12,6 +13,24 @@ class PetList extends StatefulWidget {
 class _PetListState extends State<PetList> {
   int selectedIndex = 0;
   bool isInitializing = true;
+
+  final petmodels = [
+    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
+  ];
   @override
   void initState() {
     super.initState();
@@ -40,19 +59,21 @@ class _PetListState extends State<PetList> {
               ),
             SliverToBoxAdapter(
               child: Column(children: [
-                GestureDetector(
-                  child: Pet(
-                      state: Icons.sick, color: Colors.lightBlue, size: 250),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/petview');
-                  },
-                ),
-                Pet(state: Icons.sick, color: Colors.lightBlue, size: 150),
-                Pet(state: Icons.sick, color: Colors.lightBlue, size: 250),
-                Pet(state: Icons.sick, color: Colors.lightBlue, size: 250),
-                Pet(state: Icons.sick, color: Colors.lightBlue, size: 250),
-                Pet(state: Icons.sick, color: Colors.lightBlue, size: 250),
-                Pet(state: Icons.sick, color: Colors.lightBlue, size: 250),
+                for (final pet in petmodels)
+                  GestureDetector(
+                    child: Row(
+                      children: [
+                        Pet(
+                            state: pet.icon,
+                            color: Colors.lightBlue,
+                            size: 100),
+                        Text('Nome do pet: ${pet.name.toString()}')
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/petview');
+                    },
+                  ),
               ]),
             )
           ],
