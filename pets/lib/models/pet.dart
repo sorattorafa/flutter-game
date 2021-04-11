@@ -1,18 +1,22 @@
 //import 'dart:convert';
 
+//import 'package:flutter/material.dart';
+
 import 'package:flutter/material.dart';
 
 class PetModel {
   int id;
   int userId;
   String name;
-  IconData icon;
+  String imageUrl;
+  Color color;
 
   PetModel({
-    this.name,
-    this.icon,
-    this.id,
-    this.userId,
+    @required this.name,
+    @required this.imageUrl,
+    @required this.id,
+    @required this.userId,
+    this.color,
   });
 /*
 

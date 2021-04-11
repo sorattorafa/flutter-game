@@ -15,21 +15,42 @@ class _PetListState extends State<PetList> {
   bool isInitializing = true;
 
   final petmodels = [
-    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafa', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafinha', id: 1, userId: 2, icon: Icons.sick),
-    PetModel(name: 'Rafusco', id: 1, userId: 2, icon: Icons.sick),
+    PetModel(
+        name: 'Rafa',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/frog-solid.svg',
+        color: Colors.lightGreen),
+    PetModel(
+        name: 'Rafinha',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/dog-solid.svg',
+        color: Colors.brown),
+    PetModel(
+        name: 'Rafusco',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/cat-solid.svg',
+        color: Colors.grey),
+    PetModel(
+        name: 'Rafa',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/frog-solid.svg',
+        color: Colors.lightGreen),
+    PetModel(
+        name: 'Rafinha',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/dog-solid.svg',
+        color: Colors.brown),
+    PetModel(
+        name: 'Rafusco',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/cat-solid.svg',
+        color: Colors.grey),
   ];
   @override
   void initState() {
@@ -64,14 +85,21 @@ class _PetListState extends State<PetList> {
                     child: Row(
                       children: [
                         Pet(
-                            state: pet.icon,
-                            color: Colors.lightBlue,
+                            imageUrl: pet.imageUrl,
+                            color: pet.color,
                             size: 100),
                         Text('Nome do pet: ${pet.name.toString()}')
                       ],
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/petview');
+                      //   print(pet);
+                      Navigator.pushNamed(context, '/petview',
+                          arguments: PetModel(
+                              name: pet.name,
+                              imageUrl: pet.imageUrl,
+                              id: pet.id,
+                              userId: pet.userId,
+                              color: pet.color));
                     },
                   ),
               ]),

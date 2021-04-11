@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pets/page-router.dart';
 import 'package:pets/view/farm.dart';
 import 'package:pets/view/login.dart';
 import 'package:pets/view/pet.dart';
@@ -17,6 +18,11 @@ class _PetsAppState extends State<PetsApp> {
     super.initState();
   }
 
+  /// Creates a route with the default animation
+  static Route<dynamic> defaultRoute(WidgetBuilder widgetBuilder,
+          [RouteSettings settings]) =>
+      MaterialPageRoute<dynamic>(builder: widgetBuilder, settings: settings);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,6 +33,7 @@ class _PetsAppState extends State<PetsApp> {
         '/second': (context) => SecondScreen(),
         '/petview': (context) => PetInfos(),
       },
+      //  onGenerateRoute: PageRouter.generateRoute,
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.deepPurple,

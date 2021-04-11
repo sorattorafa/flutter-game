@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pets/models/pet.dart';
 import 'package:pets/widgets/pet.dart';
 
 class PetInfos extends StatefulWidget {
@@ -20,9 +21,11 @@ class _PetInfosState extends State<PetInfos> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context).settings.arguments as PetModel;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pet: numero 1'),
+        title: Text('Pet: numero: ${args.id}'),
       ),
       body: Center(
         child: Column(
@@ -30,7 +33,7 @@ class _PetInfosState extends State<PetInfos> {
             Container(
               width: 360,
               height: 360,
-              child: Pet(state: Icons.sick, color: Colors.red, size: 250),
+              child: Pet(imageUrl: args.imageUrl, color: args.color, size: 250),
             ),
           ],
         ),
