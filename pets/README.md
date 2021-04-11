@@ -14,3 +14,6 @@ Pets game made with Docker, Python, Mysql, and Flutter.
 cd backend
 python3 main.py
 ```
+### References
+
+https://medium.com/@hamdi.fersi/python-rest-api-crud-example-using-flask-and-mysql-8211c49c27d4
