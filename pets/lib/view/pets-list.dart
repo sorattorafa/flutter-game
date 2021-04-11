@@ -64,6 +64,16 @@ class _PetListState extends State<PetList> {
     super.dispose();
   }
 
+  void openPet(PetModel pet) {
+    Navigator.pushNamed(context, '/petview',
+        arguments: PetModel(
+            name: pet.name,
+            imageUrl: pet.imageUrl,
+            id: pet.id,
+            userId: pet.userId,
+            color: pet.color));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -91,24 +101,27 @@ class _PetListState extends State<PetList> {
                         SizedBox(
                           width: 30,
                         ),
-                        Text(
-                          'Nome do pet: ${pet.name.toString()}',
-                          style: TextStyle(
-                              backgroundColor: Colors.deepPurple.shade100,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
+                        Column(
+                          children: [
+                            Text(
+                              'Nome do pet: ${pet.name.toString()}',
+                              style: TextStyle(
+                                  backgroundColor: Colors.deepPurple.shade100,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  return openPet(pet);
+                                },
+                                child: Text('Ver mais'))
+                          ],
                         ),
                       ],
                     ),
                     onTap: () {
                       //   print(pet);
-                      Navigator.pushNamed(context, '/petview',
-                          arguments: PetModel(
-                              name: pet.name,
-                              imageUrl: pet.imageUrl,
-                              id: pet.id,
-                              userId: pet.userId,
-                              color: pet.color));
+                      return openPet(pet);
                     },
                   ),
               ]),
