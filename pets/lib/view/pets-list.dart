@@ -88,7 +88,16 @@ class _PetListState extends State<PetList> {
                             imageUrl: pet.imageUrl,
                             color: pet.color,
                             size: 100),
-                        Text('Nome do pet: ${pet.name.toString()}')
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Nome do pet: ${pet.name.toString()}',
+                          style: TextStyle(
+                              backgroundColor: Colors.deepPurple.shade100,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
                     onTap: () {
