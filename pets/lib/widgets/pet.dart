@@ -17,12 +17,18 @@ class Pet extends StatelessWidget {
     return Container(
       width: 150,
       height: 150,
-      color: Colors.yellow,
-      child: SvgPicture.asset(
-        imageUrl,
-        fit: BoxFit.contain,
-        color: color,
-      ),
+      color: Colors.blue.shade50,
+      child: imageUrl.contains('svg')
+          ? SvgPicture.asset(
+              imageUrl,
+              fit: BoxFit.contain,
+              color: color,
+            )
+          : Image.asset(
+              imageUrl,
+              fit: BoxFit.contain,
+              color: color,
+            ),
     );
   }
 }

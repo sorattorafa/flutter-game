@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pets/view/profile.dart';
-import 'package:pets/view/pets-list.dart';
+import 'package:pets/view/pet-list.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
