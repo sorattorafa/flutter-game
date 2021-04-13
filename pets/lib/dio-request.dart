@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pets/flavor-config.dart';
 
+// this class is a singleton
 /// Class to manage the network request of the application.
 class NetworkRequest {
   NetworkRequest._();
