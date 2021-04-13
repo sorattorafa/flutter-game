@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 
-class OrdersHistoryService {
-  OrdersHistoryService(this._dio);
+class PetService {
+  PetService(this._dio);
 
   final Dio _dio;
 
@@ -27,7 +27,7 @@ class OrdersHistoryService {
       );
     } on Object catch (error) {
       print(error);
-      throw OrdersHistoryError.UNKNOWN_ERROR;
+      throw PetServiceError.UNKNOWN_ERROR;
     }
   }
 
@@ -39,11 +39,11 @@ class OrdersHistoryService {
       //   return Model.fromJson(response.data);
     } on Object catch (error) {
       print(error);
-      throw OrdersHistoryError.UNKNOWN_ERROR;
+      throw PetServiceError.UNKNOWN_ERROR;
     }
   }
 }
 
-enum OrdersHistoryError {
+enum PetServiceError {
   UNKNOWN_ERROR,
 }
