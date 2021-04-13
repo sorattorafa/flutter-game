@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pets/dio-request.dart';
+import 'package:pets/servcices/pet/user.dart';
 import 'package:pets/widgets/form-field.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class _FirstScreenState extends State<FirstScreen> {
   final _formKey = GlobalKey<FormState>();
   String email = '';
   TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController senhaController = TextEditingController(text: '');
   @override
   void initState() {
     super.initState();
@@ -87,7 +90,10 @@ class _FirstScreenState extends State<FirstScreen> {
                       ),
                     ),
                     SizedBox(height: 12),
-                    FormItem(formFieldName: 'senha'),
+                    FormItem(
+                      formFieldName: 'senha',
+                      controller: senhaController,
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: ElevatedButton(
@@ -96,7 +102,17 @@ class _FirstScreenState extends State<FirstScreen> {
                             //  ScaffoldMessenger.of(context).showSnackBar(
                             //       SnackBar(content: Text('Processing Data')));
                           } else {
-                            Navigator.pushReplacementNamed(context, '/second');
+                            final emailUser = senhaController.text;
+                            final password = emailController.text;
+                            UsersServices(NetworkRequest.dio)
+                                .makeLogin(emailUser, password)
+                                .then((value) {
+                              print(value);
+                              Navigator.pushReplacementNamed(
+                                  context, '/second');
+                            }).catchError((onError) {
+                              print(onError);
+                            });
                           }
                         },
                         child: Text('Login'),

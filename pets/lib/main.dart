@@ -3,7 +3,12 @@ import 'package:pets/view/farm.dart';
 import 'package:pets/view/login.dart';
 import 'package:pets/view/pet.dart';
 
+import 'flavor-config.dart';
+
 void main() {
+  FlavorConfig(
+      flavor: Flavor.USER_DEV,
+      values: FlavorValues(baseUrl: 'http://127.0.0.1:5000/'));
   runApp(PetsApp());
 }
 
@@ -17,11 +22,12 @@ class _PetsAppState extends State<PetsApp> {
     super.initState();
   }
 
+/*
   /// Creates a route with the default animation
   static Route<dynamic> defaultRoute(WidgetBuilder widgetBuilder,
           [RouteSettings settings]) =>
       MaterialPageRoute<dynamic>(builder: widgetBuilder, settings: settings);
-
+*/
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -11,7 +11,7 @@ class UsersServices {
   ) async {
     try {
       final response = await _dio.get<Map<String, dynamic>>(
-        'v1/orders',
+        '/hello',
       );
       return response.data;
     } on Object catch (error) {
