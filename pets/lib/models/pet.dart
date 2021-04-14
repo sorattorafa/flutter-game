@@ -1,6 +1,4 @@
-//import 'dart:convert';
-
-//import 'package:flutter/material.dart';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
@@ -19,19 +17,20 @@ class PetModel {
     this.color,
   });
 /*
+  PetModel petFromJson(String source) {
+    final json = jsonDecode(source);
+    return PetModel.fromJson(json);
+  }
 
-Pet petFromJson(String source) {
-  final json = jsonDecode(source);
-  return Pet.fromJson(json);
-}
-
-String petToJson(Pet source) {
-  final data = source.toJson();
-  return jsonEncode(data);
-}
-  factory Pet.fromJson(Map<String, dynamic> json) => Pet(
+  String petToJson(PetModel source) {
+    final data = source.toJson();
+    return jsonEncode(data);
+  }
+  */
+/*
+  factory Pet.fromJson(Map<String, dynamic> json) => PetModel(
         name: json["name"],
-        icon: json["icon"],
+        imageUrl: json["image_url"],
         id: json["id"],
         userId: json["user_id"],
         state: Normal(

@@ -25,6 +25,7 @@ class PetService {
         'v1/orders',
         queryParameters: queryParameters,
       );
+      return response.data;
     } on Object catch (error) {
       print(error);
       throw PetServiceError.UNKNOWN_ERROR;
