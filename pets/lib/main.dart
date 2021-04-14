@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pets/view/farm.dart';
-import 'package:pets/view/login.dart';
-import 'package:pets/view/pet.dart';
+import 'package:pets/view/pets/farm.dart';
+import 'package:pets/view/users/login.dart';
+import 'package:pets/view/pets/pet.dart';
 
 import 'flavor-config.dart';
 

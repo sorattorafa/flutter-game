@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pets/dio-request.dart';
-import 'package:pets/servcices/pet/user.dart';
+import 'package:pets/servcices/user/user.dart';
 import 'package:pets/widgets/form-field.dart';
 
 class FirstScreen extends StatefulWidget {
