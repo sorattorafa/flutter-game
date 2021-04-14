@@ -41,7 +41,7 @@ class _SecondScreenState extends State<SecondScreen> {
           }
         });
       },
-      unselectedItemColor: Theme.of(context).primaryTextTheme.headline6.color,
+      unselectedItemColor: Theme.of(context).primaryTextTheme.headline6!.color,
     );
   }
 

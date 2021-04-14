@@ -9,8 +9,7 @@ class PetService {
   Future<dynamic> listPetsByUser({
     int page = 1,
     int limit = 20,
-    List<String> status,
-    String name,
+    required String email,
   }) async {
     final queryParameters = <String, dynamic>{
       'page': page,

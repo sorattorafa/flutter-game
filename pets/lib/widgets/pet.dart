@@ -3,10 +3,10 @@ import 'package:flutter_svg/svg.dart';
 
 class Pet extends StatelessWidget {
   const Pet({
-    @required this.imageUrl,
-    @required this.color,
-    @required this.size,
-    Key key,
+    required this.imageUrl,
+    required this.color,
+    required this.size,
+    Key? key,
   }) : super(key: key);
 
   final String imageUrl;

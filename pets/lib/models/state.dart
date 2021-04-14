@@ -1,23 +1,21 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class PetState {
   String name;
-  DateTime timer;
+  DateTime? timer;
   int health;
   int hunger;
   int happy;
-  bool dirt;
-  bool sleeping;
+  bool? dirt;
+  bool? sleeping;
   int id;
 
   PetState({
-    @required this.health,
-    @required this.hunger,
-    @required this.happy,
-    @required this.id,
-    @required this.name,
+    required this.health,
+    required this.hunger,
+    required this.happy,
+    required this.id,
+    required this.name,
     this.timer,
     this.dirt,
     this.sleeping,

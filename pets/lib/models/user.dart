@@ -1,15 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class UserModel {
-  int id;
-  int userId;
+  int? id;
   String email;
-  String password;
+  String? password;
 
   UserModel({
-    @required this.email,
+    required this.email,
+    this.id,
     this.password,
   });
 
@@ -26,6 +24,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         email: json["name"],
         password: json["password"],
+        id: json["id"]
       );
 
   Map<String, dynamic> toJson() => {
