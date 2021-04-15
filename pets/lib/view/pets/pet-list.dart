@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pets/models/pet.dart';
+import 'package:pets/providers/pets.dart';
+import 'package:pets/providers/user.dart';
 import 'package:pets/widgets/adaptative-refresh-indicator.dart';
 import 'package:pets/widgets/pet.dart';
+import 'package:pets/widgets/pets-counter.dart';
 import 'package:pets/widgets/refresh-scroll-physics.dart';
+import 'package:pets/widgets/user-counter.dart';
+import 'package:provider/provider.dart';
 
 class PetList extends StatefulWidget {
   @override
@@ -90,6 +95,21 @@ class _PetListState extends State<PetList> {
               ),
             SliverToBoxAdapter(
               child: Column(children: [
+                Container(
+                  padding: const EdgeInsets.all(9),
+                  child: Row(
+                    children: [
+                      PetsCount(),
+                      Container(
+                        padding: const EdgeInsets.all(24),
+                        child: ElevatedButton(
+                            onPressed: () =>
+                                context.read<PetsProvider>().increment(),
+                            child: Text('Novo pet')),
+                      ),
+                    ],
+                  ),
+                ),
                 for (final pet in petmodels)
                   GestureDetector(
                     child: Row(
