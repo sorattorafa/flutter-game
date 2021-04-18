@@ -11,7 +11,7 @@ for x in mycursor:
 
 mycursor.execute("""CREATE TABLE users (
     id int NOT NULL AUTO_INCREMENT,
-    email varchar(255),
-    password varchar(255),
+    email varchar(255) NOT NULL UNIQUE,
+    password varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );""")

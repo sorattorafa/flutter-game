@@ -9,7 +9,10 @@ class UsersServices {
     String password,
   ) async {
     try {
-      print('oi');
+      final response = await dio.post('http://127.0.0.1:5000/users/login',
+          data: UserModel(email: email, password: password).userModelToJson());
+      print(response.data);
+      return response.data;
     } on Object catch (error) {
       print(error);
       throw UsersServicesError.INVALID_CREDENTIALS;
@@ -21,7 +24,7 @@ class UsersServices {
     String password,
   ) async {
     try {
-      final response = await dio.post('http://127.0.0.1:5000/post/user',
+      final response = await dio.post('http://127.0.0.1:5000/users/signup',
           data: UserModel(email: email, password: password).userModelToJson());
       print(response.data);
       return response.data;
