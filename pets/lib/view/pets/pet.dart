@@ -21,7 +21,7 @@ class _PetInfosState extends State<PetInfos> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context).settings.arguments as PetModel;
+    final args = ModalRoute.of(context)!.settings.arguments as PetModel;
 
     return Scaffold(
       appBar: AppBar(

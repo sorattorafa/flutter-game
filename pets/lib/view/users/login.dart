@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pets/dio-request.dart';
-import 'package:pets/servcices/pet/user.dart';
+import 'package:pets/servcices/user/user.dart';
 import 'package:pets/widgets/form-field.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -58,7 +58,7 @@ class _FirstScreenState extends State<FirstScreen> {
               end: Alignment.bottomRight,
               stops: [0.01, 0.8],
               colors: [
-                Colors.orange[100],
+                Colors.orange.shade200,
                 Colors.red.shade300,
               ],
             ),
@@ -98,7 +98,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          if (!_formKey.currentState.validate()) {
+                          if (!_formKey.currentState!.validate()) {
                             //  ScaffoldMessenger.of(context).showSnackBar(
                             //       SnackBar(content: Text('Processing Data')));
                           } else {
@@ -113,6 +113,7 @@ class _FirstScreenState extends State<FirstScreen> {
                             }).catchError((onError) {
                               print(onError);
                             });
+                            Navigator.pushReplacementNamed(context, '/second');
                           }
                         },
                         child: Text('Login'),

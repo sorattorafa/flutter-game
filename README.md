@@ -25,4 +25,5 @@ python3 main.py
 ```
 ### References
 
-https://flask-restful.readthedocs.io/en/latest/
+- https://flask-restful.readthedocs.io/en/latest/
+- https://www.mssqltips.com/sqlservertip/5173/encrypting-passwords-for-use-with-python-and-sql-server/

@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 
 class FormItem extends StatelessWidget {
   const FormItem({
-    @required this.formFieldName,
-    this.onChanged,
+    required this.formFieldName,
     this.initialValue,
     this.suffix,
-    this.controller,
-    Key key,
+    this.onChanged,
+    required this.controller,
+    Key? key,
   }) : super(key: key);
 
   final String formFieldName;
-  final Widget suffix;
-  final Function onChanged;
-  final String initialValue;
+  final Widget? suffix;
+  final Function? onChanged;
+  final String? initialValue;
   final TextEditingController controller;
 
-  
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -27,7 +26,7 @@ class FormItem extends StatelessWidget {
         return null;
       },
       initialValue: initialValue,
-      onChanged: onChanged,
+      //onChanged: onChanged.call,
       decoration: InputDecoration(
         hintText: formFieldName,
         labelStyle: TextStyle(

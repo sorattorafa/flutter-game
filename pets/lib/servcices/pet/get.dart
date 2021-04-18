@@ -9,8 +9,7 @@ class PetService {
   Future<dynamic> listPetsByUser({
     int page = 1,
     int limit = 20,
-    List<String> status,
-    String name,
+    required String email,
   }) async {
     final queryParameters = <String, dynamic>{
       'page': page,
@@ -25,6 +24,7 @@ class PetService {
         'v1/orders',
         queryParameters: queryParameters,
       );
+      return response.data;
     } on Object catch (error) {
       print(error);
       throw PetServiceError.UNKNOWN_ERROR;

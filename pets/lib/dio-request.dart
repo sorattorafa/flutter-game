@@ -6,15 +6,16 @@ import 'package:pets/flavor-config.dart';
 class NetworkRequest {
   NetworkRequest._();
 
-  static Dio _instance;
-  static String _token;
+  static Dio? _instance;
+  static String? _token;
 
   /// The main Dio instance, this will always exists.
   ///
   /// It is responsible for putting the main headers and the base Url.
   static Dio get dio => _instance ??= Dio()
-    ..options.baseUrl = FlavorConfig.instance.values.baseUrl
-    ..interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options) {
+    ..options.baseUrl = FlavorConfig.instance!.values.baseUrl
+    ..interceptors.add(InterceptorsWrapper(
+        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
       if (_token != null) {
         options.headers['x-auth-token'] = _token;
       }
@@ -26,7 +27,7 @@ class NetworkRequest {
   /// Sets the token to send.
   static set token(String newToken) => _token = newToken;
 
-  static bool get hasToken => _token != null && _token.isNotEmpty;
+  static bool get hasToken => _token != null && _token!.isNotEmpty;
 }
 
 Dio networkRequest() => NetworkRequest.dio;

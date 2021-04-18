@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pets/view/profile.dart';
-import 'package:pets/view/pet-list.dart';
+import 'package:pets/view/users/profile.dart';
+import 'package:pets/view/pets/pet-list.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -41,7 +41,7 @@ class _SecondScreenState extends State<SecondScreen> {
           }
         });
       },
-      unselectedItemColor: Theme.of(context).primaryTextTheme.headline6.color,
+      unselectedItemColor: Theme.of(context).primaryTextTheme.headline6!.color,
     );
   }
 
