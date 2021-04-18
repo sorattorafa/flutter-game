@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pets/models/pet.dart';
 import 'package:pets/providers/pets.dart';
-import 'package:pets/providers/user.dart';
 import 'package:pets/widgets/adaptative-refresh-indicator.dart';
 import 'package:pets/widgets/pet.dart';
 import 'package:pets/widgets/pets-counter.dart';
 import 'package:pets/widgets/refresh-scroll-physics.dart';
-import 'package:pets/widgets/user-counter.dart';
 import 'package:provider/provider.dart';
 
 class PetList extends StatefulWidget {
@@ -101,7 +99,7 @@ class _PetListState extends State<PetList> {
                     children: [
                       PetsCount(),
                       Container(
-                        padding: const EdgeInsets.all(24),
+                        padding: const EdgeInsets.all(18),
                         child: ElevatedButton(
                             onPressed: () =>
                                 context.read<PetsProvider>().increment(),

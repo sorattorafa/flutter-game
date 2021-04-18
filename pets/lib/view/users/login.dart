@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pets/dio-request.dart';
 import 'package:pets/servcices/user/user.dart';
 import 'package:pets/widgets/form-field.dart';
 
@@ -23,6 +22,38 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void login() {
+    if (!_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Processing Data')));
+    } else {
+      final emailUser = senhaController.text;
+      final password = emailController.text;
+      UsersServices().makeLogin(emailUser, password).then((value) {
+        print(value);
+        Navigator.pushReplacementNamed(context, '/second');
+      }).catchError((onError) {
+        print(onError);
+      });
+    }
+  }
+
+  Future<void>? signUp() {
+    if (!_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Processing Data')));
+    } else {
+      final emailUser = senhaController.text;
+      final password = emailController.text;
+      return UsersServices().createUser(emailUser, password).then((value) {
+        //print(value);
+        Navigator.pushReplacementNamed(context, '/second');
+      }).catchError((onError) {
+        print(onError);
+      });
+    }
   }
 
   @override
@@ -94,30 +125,19 @@ class _FirstScreenState extends State<FirstScreen> {
                       formFieldName: 'senha',
                       controller: senhaController,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                            //  ScaffoldMessenger.of(context).showSnackBar(
-                            //       SnackBar(content: Text('Processing Data')));
-                          } else {
-                            final emailUser = senhaController.text;
-                            final password = emailController.text;
-                            UsersServices(NetworkRequest.dio)
-                                .makeLogin(emailUser, password)
-                                .then((value) {
-                              print(value);
-                              Navigator.pushReplacementNamed(
-                                  context, '/second');
-                            }).catchError((onError) {
-                              print(onError);
-                            });
-                            Navigator.pushReplacementNamed(context, '/second');
-                          }
-                        },
-                        child: Text('Login'),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: login,
+                          child: Text('Login'),
+                        ),
+                        SizedBox(width: 12),
+                        ElevatedButton(
+                          onPressed: signUp,
+                          child: Text('Sign up'),
+                        ),
+                      ],
                     ),
                   ],
                 ),

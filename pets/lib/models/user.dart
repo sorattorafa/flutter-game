@@ -16,19 +16,16 @@ class UserModel {
     return UserModel.fromJson(json);
   }
 
-  String userModelToJson(UserModel source) {
-    final data = source.toJson();
+  String userModelToJson() {
+    final data = this.toJson();
     return jsonEncode(data);
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        email: json["name"],
-        password: json["password"],
-        id: json["id"]
-      );
+      email: json["name"], password: json["password"], id: json["id"]);
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        //"id": id,
         "password": password,
         "email": email,
       };

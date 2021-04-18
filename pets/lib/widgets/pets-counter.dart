@@ -14,6 +14,6 @@ class PetsCount extends StatelessWidget {
         /// Calls `context.watch` to make [Count] rebuild when [Counter] changes.
         'Total de pets ${context.watch<PetsProvider>().petsCount}',
         key: const Key('counterState'),
-        style: Theme.of(context).textTheme.headline4);
+        style: Theme.of(context).textTheme.headline5);
   }
 }
