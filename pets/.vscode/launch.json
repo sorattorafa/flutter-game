@@ -9,7 +9,7 @@
             "type": "dart",
             "request": "launch",
             "program": "lib/main.dart",
-            "args": ["--flavor", "user_dev"]
+            "args": ["--flavor", "user_dev", "--no-sound-null-safety"]
         },
         {
             "name": "Driver DEV",
