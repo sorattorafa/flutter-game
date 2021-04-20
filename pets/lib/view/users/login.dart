@@ -14,6 +14,8 @@ class _FirstScreenState extends State<FirstScreen> {
   String email = '';
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController senhaController = TextEditingController(text: '');
+  bool hasLoginError = false;
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +37,7 @@ class _FirstScreenState extends State<FirstScreen> {
         print(value);
         Navigator.pushReplacementNamed(context, '/second');
       }).catchError((onError) {
+        hasLoginError = true;
         print(onError);
       });
     }
@@ -139,6 +142,10 @@ class _FirstScreenState extends State<FirstScreen> {
                         ),
                       ],
                     ),
+                    Visibility(
+                        visible: hasLoginError,
+                        child: Text('Invalid credentials, try again',
+                            style: TextStyle(color: Colors.black)))
                   ],
                 ),
               ),

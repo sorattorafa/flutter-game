@@ -9,14 +9,12 @@
             "type": "dart",
             "request": "launch",
             "program": "pets/lib/main.dart",
-            "args": ["--flavor", "user_dev"]
         },
         {
             "name": "Driver DEV",
             "type": "dart",
             "request": "launch",
             "program": "pets/lib/main_driver_dev.dart",
-            "args": ["--flavor", "driver_dev"]
         },
         {
             "name": "User DEV Profile",
@@ -24,7 +22,6 @@
             "request": "launch",
             "program": "pets/lib/main_user_dev.dart",
             "flutterMode": "profile",
-            "args": ["--flavor", "user_dev"]
         },
         {
             "name": "Driver DEV Profile",
@@ -32,7 +29,6 @@
             "request": "launch",
             "program": "pets/lib/main_driver_dev.dart",
             "flutterMode": "profile",
-            "args": ["--flavor", "driver_dev"]
         }
     ]
 }
