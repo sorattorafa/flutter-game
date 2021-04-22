@@ -8,7 +8,7 @@
             "name": "User DEV",
             "type": "dart",
             "request": "launch",
-            "program": "pets/lib/main.dart",
+            "program": "lib/main.dart",
         },
     ]
 }
