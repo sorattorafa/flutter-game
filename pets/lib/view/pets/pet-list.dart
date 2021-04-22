@@ -132,42 +132,6 @@ class _PetListState extends State<PetList> {
                     ],
                   ),
                 ),
-                /*
-                for (final pet in petmodels)
-                  GestureDetector(
-                    child: Row(
-                      children: [
-                        Pet(
-                            imageUrl: pet.imageUrl,
-                            color: pet.color,
-                            size: 100),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              'Nome do pet: ${pet.name.toString()}',
-                              style: TextStyle(
-                                  backgroundColor: Colors.deepPurple.shade100,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  return openPet(pet);
-                                },
-                                child: Text('Ver mais'))
-                          ],
-                        ),
-                      ],
-                    ),
-                    onTap: () {
-                      //   print(pet);
-                      return openPet(pet);
-                    },
-                  ),
-                  */
               ]),
             ),
             SliverList(
