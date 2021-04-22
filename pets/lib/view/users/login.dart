@@ -33,6 +33,8 @@ class _FirstScreenState extends State<FirstScreen> {
     } else {
       final emailUser = senhaController.text;
       final password = emailController.text;
+
+        Navigator.pushReplacementNamed(context, '/second');
       UsersServices().makeLogin(emailUser, password).then((value) {
         print(value);
         Navigator.pushReplacementNamed(context, '/second');

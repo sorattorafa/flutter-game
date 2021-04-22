@@ -54,6 +54,30 @@ class _PetListState extends State<PetList> {
         userId: 2,
         imageUrl: 'assets/images/cat-solid.svg',
         color: Colors.grey),
+    PetModel(
+        name: 'Rafusco',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/cat-solid.svg',
+        color: Colors.grey),
+    PetModel(
+        name: 'Rafusco',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/cat-solid.svg',
+        color: Colors.grey),
+    PetModel(
+        name: 'Rafusco',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/cat-solid.svg',
+        color: Colors.grey),
+    PetModel(
+        name: 'Rafusco',
+        id: 1,
+        userId: 2,
+        imageUrl: 'assets/images/cat-solid.svg',
+        color: Colors.grey),
   ];
   @override
   void initState() {
@@ -108,6 +132,7 @@ class _PetListState extends State<PetList> {
                     ],
                   ),
                 ),
+                /*
                 for (final pet in petmodels)
                   GestureDetector(
                     child: Row(
@@ -142,8 +167,34 @@ class _PetListState extends State<PetList> {
                       return openPet(pet);
                     },
                   ),
+                  */
               ]),
-            )
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  final pet = petmodels[index];
+                  return GestureDetector(
+                    child: Container(
+                      padding: const EdgeInsets.all(9),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Pet(
+                                imageUrl: pet.imageUrl,
+                                color: pet.color,
+                                size: 100),
+                          ]),
+                    ),
+                    onTap: () {
+                      //   print(pet);
+                      return openPet(pet);
+                    },
+                  );
+                },
+                childCount: petmodels.length,
+              ),
+            ),
           ],
         ),
       ),
