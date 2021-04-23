@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pets/providers/pets.dart';
 import 'package:pets/providers/user.dart';
 import 'package:pets/view/pets/farm.dart';
+import 'package:pets/view/pets/new-pet.dart';
 import 'package:pets/view/users/login.dart';
 import 'package:pets/view/pets/pet.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class _PetsAppState extends State<PetsApp> {
           '/': (context) => FirstScreen(),
           '/second': (context) => SecondScreen(),
           '/petview': (context) => PetInfos(),
+          '/newpet': (context) => NewPet(),
         },
         //  onGenerateRoute: PageRouter.generateRoute,
         theme: ThemeData(

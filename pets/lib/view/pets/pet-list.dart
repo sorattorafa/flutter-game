@@ -92,13 +92,7 @@ class _PetListState extends State<PetList> {
   }
 
   void openPet(PetModel pet) {
-    Navigator.pushNamed(context, '/petview',
-        arguments: PetModel(
-            name: pet.name,
-            imageUrl: pet.imageUrl,
-            id: pet.id,
-            userId: pet.userId,
-            color: pet.color));
+    Navigator.pushNamed(context, '/petview', arguments: pet);
   }
 
   @override
@@ -126,8 +120,10 @@ class _PetListState extends State<PetList> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         child: ElevatedButton(
-                            onPressed: () =>
-                                context.read<PetsProvider>().increment(),
+                            onPressed: () async {
+                              Navigator.pushNamed(context, '/newpet');
+                              context.read<PetsProvider>().increment();
+                            },
                             child: Text('Novo pet')),
                       ),
                     ],

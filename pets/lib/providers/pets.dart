@@ -4,7 +4,16 @@ import 'package:flutter/material.dart';
 class PetsProvider with ChangeNotifier, DiagnosticableTreeMixin {
   int _petsCount = 0;
 
+  bool _hasSelectedPet = false;
+
+  bool get hasSelectedPet => _hasSelectedPet;
+
   int get petsCount => _petsCount;
+
+  void setSelectedPet() {
+    _hasSelectedPet = !_hasSelectedPet;
+    notifyListeners();
+  }
 
   void increment() {
     _petsCount++;

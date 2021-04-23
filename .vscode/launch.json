@@ -10,25 +10,5 @@
             "request": "launch",
             "program": "pets/lib/main.dart",
         },
-        {
-            "name": "Driver DEV",
-            "type": "dart",
-            "request": "launch",
-            "program": "pets/lib/main_driver_dev.dart",
-        },
-        {
-            "name": "User DEV Profile",
-            "type": "dart",
-            "request": "launch",
-            "program": "pets/lib/main_user_dev.dart",
-            "flutterMode": "profile",
-        },
-        {
-            "name": "Driver DEV Profile",
-            "type": "dart",
-            "request": "launch",
-            "program": "pets/lib/main_driver_dev.dart",
-            "flutterMode": "profile",
-        }
     ]
 }
