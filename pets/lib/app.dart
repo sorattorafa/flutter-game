@@ -64,17 +64,17 @@ class _PetsAppState extends State<PetsApp> {
             fillColor: Color(0x0A000000),
           ),
           appBarTheme: AppBarTheme(
-            color: Colors.purple.shade700,
+            color: Colors.purple.shade200,
             brightness: Brightness.light,
             iconTheme: IconThemeData(color: Colors.grey[800]),
             elevation: 2.5,
           ),
-          buttonColor: Colors.purple.shade500,
+          buttonColor: Colors.purple.shade300,
           buttonTheme: ButtonThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(22.0),
             ),
-            buttonColor: Colors.purple.shade500,
+            buttonColor: Colors.purple.shade400,
           ),
         ),
       ),
