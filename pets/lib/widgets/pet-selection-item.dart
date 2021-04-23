@@ -17,9 +17,6 @@ class PetSelectionItem extends StatefulWidget {
 }
 
 class _PetPetSelectionItemState extends State<PetSelectionItem> {
-  bool enabled = true;
-  bool clicked = false;
-
   @override
   Widget build(BuildContext context) {
     final petProvider = Provider.of<PetsProvider>(context, listen: false);
@@ -34,20 +31,12 @@ class _PetPetSelectionItemState extends State<PetSelectionItem> {
         ),
         child: RadioButtonItem(
           enabled: true,
-          selected: clicked,
+          selected:
+              context.watch<PetsProvider>().selectedPet == widget.imageUrl,
           onPressed: () {
-            if(clicked){
-               setState(() {
-                clicked = false;
-                petProvider.setSelectedPet();
-              });
-            }
-            else if (!petProvider.hasSelectedPet) {
-              setState(() {
-                clicked = !clicked;
-                petProvider.setSelectedPet();
-              });
-            }
+            setState(() {
+              petProvider.setSelectedPet(widget.imageUrl);
+            });
           },
           child: Image.asset(
             widget.imageUrl,
