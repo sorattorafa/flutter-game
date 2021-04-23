@@ -33,7 +33,12 @@ class _PetInfosState extends State<PetInfos> {
             Container(
               width: 360,
               height: 360,
-              child: Pet(imageUrl: args.imageUrl, color: args.color, size: 250),
+              child: Pet(
+                imageUrl: args.imageUrl,
+                color: args.color,
+                size: 250,
+                name: args.name,
+              ),
             ),
           ],
         ),

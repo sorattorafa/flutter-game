@@ -111,6 +111,7 @@ class _PetListState extends State<PetList> {
             if (!isInitializing)
               CupertinoSliverRefreshControl(
                 onRefresh: () async {
+                  setState(() {});
                   return Future.value(true);
                 },
                 builder: buildAdaptativeRefreshIndicator,
@@ -118,12 +119,12 @@ class _PetListState extends State<PetList> {
             SliverToBoxAdapter(
               child: Column(children: [
                 Container(
-                  padding: const EdgeInsets.all(9),
+                  padding: const EdgeInsets.all(4),
                   child: Row(
                     children: [
                       PetsCount(),
                       Container(
-                        padding: const EdgeInsets.all(18),
+                        padding: const EdgeInsets.all(12),
                         child: ElevatedButton(
                             onPressed: () =>
                                 context.read<PetsProvider>().increment(),
@@ -140,14 +141,53 @@ class _PetListState extends State<PetList> {
                   final pet = petmodels[index];
                   return GestureDetector(
                     child: Container(
-                      padding: const EdgeInsets.all(9),
+                      padding: const EdgeInsets.all(4),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Pet(
                                 imageUrl: pet.imageUrl,
                                 color: pet.color,
-                                size: 100),
+                                name: pet.name,
+                                size: 150),
+                            Container(
+                              width: 210,
+                              height: 220,
+                              padding: const EdgeInsets.all(12),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text('Life',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 12)),
+                                    Slider(
+                                      min: 0,
+                                      max: 100,
+                                      value: 50,
+                                      activeColor: Colors.red.shade200,
+                                      onChanged: (onchanged) {},
+                                    ),
+                                    Text('Happy',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 12)),
+                                    Slider(
+                                      min: 0,
+                                      max: 100,
+                                      value: 50,
+                                      activeColor: Colors.orange.shade200,
+                                      onChanged: (onchanged) {},
+                                    ),
+                                    Text('Hungry',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 12)),
+                                    Slider(
+                                      min: 0,
+                                      max: 100,
+                                      value: 50,
+                                      onChanged: (onchanged) {},
+                                    ),
+                                  ]),
+                            ),
                           ]),
                     ),
                     onTap: () {
