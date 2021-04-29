@@ -18,7 +18,9 @@ class UsersServices {
       print(response.data);
       return response.data;
     } on Object catch (error) {
-      print(error);
+      if (error is DioError) {
+        throw UsersServicesError.UNKNOWN_ERROR;
+      }
       throw UsersServicesError.INVALID_CREDENTIALS;
     }
   }
@@ -33,7 +35,9 @@ class UsersServices {
       print(response.data);
       return response.data;
     } on Object catch (error) {
-      print(error);
+      if (error is DioError) {
+        throw UsersServicesError.UNKNOWN_ERROR;
+      }
       throw UsersServicesError.INVALID_CREDENTIALS;
     }
   }

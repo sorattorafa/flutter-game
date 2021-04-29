@@ -13,7 +13,7 @@ class LoadingState extends UserState {
   List<Object> get props => [];
 }
 
-class LoadedSucess extends UserState {
+class LoginSucess extends UserState {
   @override
   List<Object> get props => [];
 }
@@ -28,6 +28,11 @@ class LoadedState extends UserState {
 }
 
 class ErrorState extends UserState {
+  @override
+  List<Object> get props => [];
+}
+
+class NetworkErrorState extends UserState {
   @override
   List<Object> get props => [];
 }

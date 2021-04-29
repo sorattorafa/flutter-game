@@ -9,16 +9,38 @@ class UserCubit extends Cubit<UserState> {
   late UserModel actualUser;
   final UsersServices repository;
 
+  UserState returnError(Object e) {
+    var error;
+    if (e == UsersServicesError.UNKNOWN_ERROR) {
+      error = NetworkErrorState();
+    } else {
+      error = ErrorState();
+    }
+    emit(error);
+    return error;
+  }
+
   Future<UserState> makeLogin(UserModel user) async {
     try {
       emit(LoadingState());
       final userLogin = await repository.makeLogin(user.email, user.password!);
       actualUser = userLogin;
       emit(LoadedState(actualUser));
-      return LoadedSucess();
+      return LoginSucess();
     } catch (e) {
-      emit(ErrorState());
-      return ErrorState();
+      return returnError(e);
+    }
+  }
+
+  Future<UserState> createUser(UserModel user) async {
+    try {
+      emit(LoadingState());
+      final userLogin = await repository.createUser(user.email, user.password!);
+      actualUser = userLogin;
+      emit(LoadedState(actualUser));
+      return LoginSucess();
+    } catch (e) {
+      return returnError(e);
     }
   }
 }
