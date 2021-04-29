@@ -63,7 +63,7 @@ class _PetsAppState extends State<PetsApp> {
         theme: ThemeData(
           brightness: Brightness.light,
           primarySwatch: Colors.deepPurple,
-          primaryColor: Colors.purple.shade500,
+          primaryColor: Colors.deepPurple,
           scaffoldBackgroundColor: Colors.white,
           primaryTextTheme: TextTheme(
             headline6: TextStyle(color: Colors.grey[800]),

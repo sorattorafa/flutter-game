@@ -19,7 +19,7 @@ class _PetBuilderState extends State<PetBuilder> {
   void openPet(PetModel pet) {
     Navigator.pushNamed(context, '/petview', arguments: pet);
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PetsCubit, PetsState>(
@@ -45,7 +45,7 @@ class _PetBuilderState extends State<PetBuilder> {
                 final pet = pets[index];
                 return GestureDetector(
                   child: Container(
-                    padding: const EdgeInsets.all(9),
+                    padding: const EdgeInsets.all(24),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -54,44 +54,6 @@ class _PetBuilderState extends State<PetBuilder> {
                               color: pet.color,
                               name: pet.name,
                               size: 125),
-                          Container(
-                            width: 210,
-                            height: 220,
-                            padding: const EdgeInsets.all(12),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text('Life',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 12)),
-                                  Slider(
-                                    min: 0,
-                                    max: 100,
-                                    value: 50,
-                                    activeColor: Colors.red.shade200,
-                                    onChanged: (onchanged) {},
-                                  ),
-                                  Text('Happy',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 12)),
-                                  Slider(
-                                    min: 0,
-                                    max: 100,
-                                    value: 50,
-                                    activeColor: Colors.orange.shade200,
-                                    onChanged: (onchanged) {},
-                                  ),
-                                  Text('Hungry',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 12)),
-                                  Slider(
-                                    min: 0,
-                                    max: 100,
-                                    value: 50,
-                                    onChanged: (onchanged) {},
-                                  ),
-                                ]),
-                          ),
                         ]),
                   ),
                   onTap: () {
