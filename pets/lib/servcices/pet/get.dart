@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:pets/models/pet.dart';
 
 class PetService {
   PetService(this._dio);
@@ -9,8 +11,17 @@ class PetService {
   Future<dynamic> listPetsByUser({
     int page = 1,
     int limit = 20,
-    required String email,
   }) async {
+    final petmodels = [
+      PetModel(
+          name: 'Rafa',
+          id: 1,
+          userId: 2,
+          imageUrl: 'assets/images/frog/happy.png',
+          color: Colors.lightGreen),
+    ];
+    return petmodels;
+    /*
     final queryParameters = <String, dynamic>{
       'page': page,
       'limit': limit,
@@ -18,6 +29,7 @@ class PetService {
         {'updated_at': 'desc'}
       ]),
     };
+
 
     try {
       final response = await _dio.get<Map<String, dynamic>>(
@@ -29,14 +41,18 @@ class PetService {
       print(error);
       throw PetServiceError.UNKNOWN_ERROR;
     }
+    */
   }
 
-  Future<dynamic> makeLogin(
-    String email,
-    String password,
-  ) async {
+  Future<dynamic> addPet() async {
     try {
       //   return Model.fromJson(response.data);
+      return PetModel(
+          name: 'Rafusco',
+          id: 1,
+          userId: 2,
+          imageUrl: 'assets/images/cat-solid.svg',
+          color: Colors.grey);
     } on Object catch (error) {
       print(error);
       throw PetServiceError.UNKNOWN_ERROR;
