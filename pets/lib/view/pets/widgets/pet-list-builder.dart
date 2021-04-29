@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets/cubit/pets/cubit.dart';
 import 'package:pets/cubit/pets/state.dart';
 import 'package:pets/models/pet.dart';
-import 'package:pets/widgets/pet.dart';
+import 'package:pets/view/pets/widgets/pet.dart';
 
 class PetBuilder extends StatefulWidget {
   const PetBuilder({

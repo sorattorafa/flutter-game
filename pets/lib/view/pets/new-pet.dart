@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pets/cubit/pets/cubit.dart';
 import 'package:pets/models/pet.dart';
 import 'package:pets/widgets/form-field.dart';
-import 'package:pets/widgets/pet-selection-item.dart';
+import 'package:pets/view/pets/widgets/pet-selection-item.dart';
 
 import 'package:provider/provider.dart';
 

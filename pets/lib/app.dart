@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets/cubit/pets/cubit.dart';
+import 'package:pets/cubit/users/cubit.dart';
+import 'package:pets/cubit/users/repository.dart';
 import 'package:pets/providers/pets.dart';
 import 'package:pets/providers/user.dart';
-import 'package:pets/servcices/pet/get.dart';
+import 'package:pets/cubit/pets/repository.dart';
 import 'package:pets/view/pets/farm.dart';
 import 'package:pets/view/pets/new-pet.dart';
 import 'package:pets/view/users/login.dart';
@@ -36,6 +38,13 @@ class _PetsAppState extends State<PetsApp> {
         BlocProvider<PetsCubit>(
           create: (context) => PetsCubit(
             repository: PetService(
+              Dio(),
+            ),
+          ),
+        ),
+        BlocProvider<UserCubit>(
+          create: (context) => UserCubit(
+            repository: UsersServices(
               Dio(),
             ),
           ),

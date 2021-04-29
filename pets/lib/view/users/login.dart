@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pets/servcices/user/user.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets/cubit/users/cubit.dart';
+import 'package:pets/cubit/users/state.dart';
+import 'package:pets/models/user.dart';
 import 'package:pets/widgets/form-field.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -14,7 +17,6 @@ class _FirstScreenState extends State<FirstScreen> {
   String email = '';
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController senhaController = TextEditingController(text: '');
-  bool hasLoginError = false;
 
   @override
   void initState() {
@@ -24,41 +26,6 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void dispose() {
     super.dispose();
-  }
-
-  void login() {
-    if (!_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Processing Data')));
-    } else {
-      final emailUser = senhaController.text;
-      final password = emailController.text;
-
-        Navigator.pushReplacementNamed(context, '/second');
-      UsersServices().makeLogin(emailUser, password).then((value) {
-        print(value);
-        Navigator.pushReplacementNamed(context, '/second');
-      }).catchError((onError) {
-        hasLoginError = true;
-        print(onError);
-      });
-    }
-  }
-
-  Future<void>? signUp() {
-    if (!_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Processing Data')));
-    } else {
-      final emailUser = senhaController.text;
-      final password = emailController.text;
-      return UsersServices().createUser(emailUser, password).then((value) {
-        //print(value);
-        Navigator.pushReplacementNamed(context, '/second');
-      }).catchError((onError) {
-        print(onError);
-      });
-    }
   }
 
   @override
@@ -99,69 +66,73 @@ class _FirstScreenState extends State<FirstScreen> {
               ],
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    FormItem(
-                      formFieldName: 'email',
-                      controller: emailController,
-                      suffix: Visibility(
-                        visible: true,
-                        child: IconButton(
-                          icon: const Icon(Icons.cancel),
-                          color: Colors.purple.shade500,
-                          onPressed: () {
-                            setState(() {
-                              emailController = TextEditingController(text: '');
-                            });
-                          },
+          child: BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      FormItem(
+                        formFieldName: 'email',
+                        controller: emailController,
+                        suffix: Visibility(
+                          visible: true,
+                          child: IconButton(
+                            icon: const Icon(Icons.cancel),
+                            color: Colors.purple.shade500,
+                            onPressed: () {
+                              setState(() {
+                                emailController =
+                                    TextEditingController(text: '');
+                              });
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 12),
-                    FormItem(
-                      formFieldName: 'senha',
-                      controller: senhaController,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: login,
-                          child: Text('Login'),
-                        ),
-                        SizedBox(width: 12),
-                        ElevatedButton(
-                          onPressed: signUp,
-                          child: Text('Sign up'),
-                        ),
-                      ],
-                    ),
-                    Visibility(
-                        visible: hasLoginError,
-                        child: Text('Invalid credentials, try again',
-                            style: TextStyle(color: Colors.black)))
-                  ],
+                      SizedBox(height: 12),
+                      FormItem(
+                        formFieldName: 'senha',
+                        controller: senhaController,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () async {
+                              context.select((value) => null);
+                              final result = await context
+                                  .read<UserCubit>()
+                                  .makeLogin(UserModel(
+                                      email: emailController.text,
+                                      password: senhaController.text));
+                              if (result == ErrorState()) {
+                                Navigator.pushNamed(context, '/second');
+                              }
+                            }, //login,
+                            child: Text('Login'),
+                          ),
+                          SizedBox(width: 12),
+                          ElevatedButton(
+                            onPressed: null, //signUp,
+                            child: Text('Sign up'),
+                          ),
+                        ],
+                      ),
+                      Visibility(
+                          visible: state == ErrorState(),
+                          child: Text('Invalid credentials, try again',
+                              style: TextStyle(color: Colors.red.shade700)))
+                    ],
+                  ),
                 ),
-              ),
-              /*
-              ElevatedButton(
-                child: Text('Launch screen'),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/second');
-                  // Navigate to the second screen when tapped.
-                },
-              ),
-              */
-            ],
-          ),
+              ],
+            );
+          }),
         ),
       ),
     );

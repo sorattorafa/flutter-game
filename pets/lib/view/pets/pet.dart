@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pets/models/pet.dart';
-import 'package:pets/widgets/pet.dart';
+import 'package:pets/view/pets/widgets/pet.dart';
 
 class PetInfos extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pets/widgets/pets-counter.dart';
+import 'package:pets/view/pets/widgets/pets-counter.dart';
 
 class TotalPetsSection extends StatelessWidget {
   const TotalPetsSection({

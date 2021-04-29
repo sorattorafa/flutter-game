@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets/cubit/pets/cubit.dart';
 import 'package:pets/widgets/adaptative-refresh-indicator.dart';
-import 'package:pets/widgets/pet-list.dart';
+import 'package:pets/view/pets/widgets/pet-list-builder.dart';
 import 'package:pets/widgets/refresh-scroll-physics.dart';
-import 'package:pets/widgets/total-pets-section.dart';
+import 'package:pets/view/pets/widgets/total-pets-section.dart';
 import 'package:provider/provider.dart';
 
 class PetList extends StatefulWidget {

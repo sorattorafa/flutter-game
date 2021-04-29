@@ -1,15 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:pets/models/user.dart';
 
+//import 'package:flutter/material.dart';
+
 class UsersServices {
-  final dio = Dio();
+  UsersServices(this._dio);
+
+  final Dio _dio;
 
   Future<dynamic> makeLogin(
     String email,
     String password,
   ) async {
     try {
-      final response = await dio.post('http://127.0.0.1:5000/users/login',
+      final response = await _dio.post('http://127.0.0.1:5000/users/login',
           data: UserModel(email: email, password: password).userModelToJson());
       print(response.data);
       return response.data;
@@ -24,7 +28,7 @@ class UsersServices {
     String password,
   ) async {
     try {
-      final response = await dio.post('http://127.0.0.1:5000/users/signup',
+      final response = await _dio.post('http://127.0.0.1:5000/users/signup',
           data: UserModel(email: email, password: password).userModelToJson());
       print(response.data);
       return response.data;
