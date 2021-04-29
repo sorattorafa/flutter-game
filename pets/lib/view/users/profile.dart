@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pets/cubit/pets/cubit.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -20,34 +22,27 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          Container(
-            width: 360,
-            height: 360,
-            child: Icon(Icons.person, size: 360, color: Colors.black),
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(44),
-            child: Column(
-              children: [
-                Text('total de petes: 10'),
-                Text('total de petes doentes: 10'),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/');
-              },
-              child: Text('Logout'),
-            ),
-          ),
-        ],
+        child: Column(
+    children: [
+      Container(
+        child: Icon(Icons.person, size: 200, color: Colors.black),
       ),
-    );
+      Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Text('total de pets: ${context.watch<PetsCubit>().getPetsLength}'),
+          ],
+        ),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/');
+        },
+        child: Text('Logout'),
+      ),
+    ],
+        ),
+      );
   }
 }
