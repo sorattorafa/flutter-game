@@ -135,7 +135,7 @@ class _FirstScreenState extends State<FirstScreen> {
                                     .createUser(UserModel(
                                         email: emailController.text,
                                         password: senhaController.text));
-                                if (result != LoginSucess()) {
+                                if (result == LoginSucess()) {
                                   Navigator.pushReplacementNamed(
                                       context, '/second');
                                 }
