@@ -104,7 +104,6 @@ class _FirstScreenState extends State<FirstScreen> {
                         children: [
                           ElevatedButton(
                             onPressed: () async {
-                              context.select((value) => null);
                               final result = await context
                                   .read<UserCubit>()
                                   .makeLogin(UserModel(
