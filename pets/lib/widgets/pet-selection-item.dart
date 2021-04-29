@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pets/cubit/pets/cubit.dart';
+import 'package:pets/models/pet.dart';
 import 'package:pets/providers/pets.dart';
 import 'package:pets/widgets/radio_button_item.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +24,8 @@ class _PetPetSelectionItemState extends State<PetSelectionItem> {
     final petProvider = Provider.of<PetsProvider>(context, listen: false);
 
     return Container(
-      width: 150,
-      height: 150,
+      width: 120,
+      height: 120,
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           minWidth: 10.0,

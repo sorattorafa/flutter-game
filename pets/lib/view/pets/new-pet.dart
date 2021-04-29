@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pets/cubit/pets/cubit.dart';
+import 'package:pets/models/pet.dart';
 import 'package:pets/widgets/form-field.dart';
 import 'package:pets/widgets/pet-selection-item.dart';
+
+import 'package:provider/provider.dart';
 
 class NewPet extends StatefulWidget {
   @override
@@ -96,6 +100,12 @@ class _NewPetState extends State<NewPet> {
               padding: const EdgeInsets.all(12),
               child: ElevatedButton(
                   onPressed: () async {
+                    context.read<PetsCubit>().addPet(PetModel(
+                        name: 'Rafa',
+                        id: 1,
+                        userId: 2,
+                        imageUrl: 'assets/images/frog/happy.png',
+                        color: Colors.lightGreen));
                     Navigator.pop(context);
                   },
                   child: Text('Create pet')),
