@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pets/models/pet.dart';
 
 class Pet extends StatefulWidget {
   const Pet({
-    required this.imageUrl,
-    required this.color,
+    required this.pet,
     required this.size,
-    required this.name,
     Key? key,
   }) : super(key: key);
 
-  final String imageUrl;
-  final String name;
-  final Color color;
+  final PetModel pet;
   final double size;
 
   @override
@@ -36,21 +33,22 @@ class _PetState extends State<Pet> {
   Widget build(BuildContext context) {
     return Row(children: [
       Column(children: [
-        Text(widget.name, style: TextStyle(color: Colors.black, fontSize: 16)),
+        Text(widget.pet.name,
+            style: TextStyle(color: Colors.black, fontSize: 16)),
         Container(
           width: widget.size,
           height: widget.size,
           color: Colors.blue.shade50,
-          child: widget.imageUrl.contains('svg')
+          child: widget.pet.imageUrl.contains('svg')
               ? SvgPicture.asset(
-                  widget.imageUrl,
+                  widget.pet.imageUrl,
                   fit: BoxFit.contain,
-                  color: widget.color,
+                  color: widget.pet.color,
                 )
               : Image.asset(
-                  widget.imageUrl,
+                  widget.pet.imageUrl,
                   fit: BoxFit.contain,
-                  color: widget.color,
+                  color: widget.pet.color,
                 ),
         ),
       ]),
@@ -61,7 +59,7 @@ class _PetState extends State<Pet> {
           child: Slider(
             min: 0,
             max: 100,
-            value: 50,
+            value: widget.pet.life.toDouble(),
             onChanged: (onchanged) {},
           ),
         ),
@@ -71,7 +69,7 @@ class _PetState extends State<Pet> {
           child: Slider(
             min: 0,
             max: 100,
-            value: 50,
+            value: widget.pet.happy.toDouble(),
             onChanged: (onchanged) {},
           ),
         ),
@@ -81,7 +79,17 @@ class _PetState extends State<Pet> {
           child: Slider(
             min: 0,
             max: 100,
-            value: 50,
+            value: widget.pet.hungry.toDouble(),
+            onChanged: (onchanged) {},
+          ),
+        ),
+        Text('Sleep', style: TextStyle(color: Colors.black, fontSize: 12)),
+        SliderTheme(
+          data: returnSliverThemeData(Colors.blue[800]!, Colors.purple[100]!),
+          child: Slider(
+            min: 0,
+            max: 100,
+            value: widget.pet.sleep.toDouble(),
             onChanged: (onchanged) {},
           ),
         ),

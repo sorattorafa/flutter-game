@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pets/cubit/pets/cubit.dart';
 import 'package:pets/cubit/users/cubit.dart';
+import 'package:pets/providers/pets.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
@@ -41,6 +42,7 @@ class _ProfileState extends State<Profile> {
             onPressed: () {
               context.read<UserCubit>().clearActualUser();
               context.read<PetsCubit>().clearPets();
+              context.read<PetsProvider>().clearProvider();
               Navigator.pushReplacementNamed(context, '/');
             },
             child: Text('Logout'),

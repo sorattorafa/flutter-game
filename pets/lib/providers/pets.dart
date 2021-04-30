@@ -20,6 +20,9 @@ class PetsProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
+  void clearProvider(){
+    _petsCount = 0 ;
+  }
   /// Makes `petsProvider` readable inside the devtools by listing all of its properties
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

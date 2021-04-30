@@ -8,7 +8,7 @@ from invalidusage import InvalidUsage
 from flask_restful import fields, marshal_with
 
 mydb = mysql.connector.connect(
-    option_files='configs/env.config', option_groups=['connection_details'])
+    option_files='src/configs/env.config', option_groups=['connection_details'])
 mycursor = mydb.cursor()
 
 ## TODO:  check result before commit
@@ -40,7 +40,6 @@ class UsersLogin(Resource):
         sql = "SELECT id, email FROM users WHERE email = %s AND password = %s"
         adr = (email, password,)
         mycursor.execute(sql, adr)
-
         myresult = mycursor.fetchall()
         if(len(myresult) <= 0):
             raise InvalidUsage('User not found', status_code=404)
@@ -64,26 +63,28 @@ class Pets(Resource):
         mycursor.execute(sql, val)
         mydb.commit()
         myresult = mycursor.fetchall()
+        pet_id = mycursor.lastrowid
+        sql = '''
+        SELECT id, image_url, sleep, happy, hungry, name, life
+        FROM pets
+        WHERE id = %s
+        '''
+        val = (pet_id,)
+        mycursor.execute(sql, val)
+        myresult = mycursor.fetchall()
         return myresult
 
 class GetPetsByUser(Resource):
     def get(self, user_id):
-        print(user_id)
 
-        #Retrieving single row
         sql = '''
-        SELECT pets.id, pets.image_url, pets.sleep, pets.happy, pets.hungry, pets.name
+        SELECT pets.id, pets.image_url, pets.sleep, pets.happy, pets.hungry, pets.name, pets.life
         FROM users INNER JOIN pets ON users.id = pets.user_id 
         WHERE users.id = %s
         '''
         
         val = (user_id,)
-
         mycursor.execute(sql, val)
-
         myresult = mycursor.fetchall()
-
-        for x in myresult:
-            print(x)
 
         return myresult  # myresult

@@ -1,6 +1,6 @@
 import mysql.connector
 
-mydb = mysql.connector.connect(option_files='configs/env.config', option_groups=['connection_details'])
+mydb = mysql.connector.connect(option_files='src/configs/env.config', option_groups=['connection_details'])
 
 mycursor = mydb.cursor()
 
@@ -23,6 +23,7 @@ mycursor.execute("""CREATE TABLE pets(
     sleep INT,
     hungry INT,
     happy INT,
+    life INT DEFAULT 100,
     image_url varchar(100) NOT NULL,
     CONSTRAINT fk_users
     FOREIGN KEY (user_id) 

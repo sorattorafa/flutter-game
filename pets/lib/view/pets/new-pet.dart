@@ -112,6 +112,7 @@ class _NewPetState extends State<NewPet> {
                           happy: 100,
                           hungry: 100,
                           sleep: 100,
+                          life: 100,
                         ));
                     Navigator.pop(context);
                   },

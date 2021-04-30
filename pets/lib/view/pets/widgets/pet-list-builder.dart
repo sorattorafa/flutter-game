@@ -55,11 +55,7 @@ class _PetBuilderState extends State<PetBuilder> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Pet(
-                              imageUrl: pet.imageUrl,
-                              color: pet.color,
-                              name: pet.name,
-                              size: 125),
+                          Pet(pet: pet, size: 125),
                         ]),
                   ),
                   onTap: () {

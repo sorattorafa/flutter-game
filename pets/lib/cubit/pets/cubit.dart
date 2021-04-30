@@ -10,9 +10,11 @@ class PetsCubit extends Cubit<PetsState> {
 
   final PetService repository;
 
+  int getPetNumber(int petId) =>
+      _pets.indexWhere((element) => element.id == petId) + 1;
+
   Future<dynamic> listPetsByUser(int userId) async {
     try {
-      //  emit(LoadingState());
       emit(LoadingState());
       final pets = await repository.listPetsByUser(userId);
       _pets = _pets.isNotEmpty ? _pets : pets;
@@ -30,9 +32,7 @@ class PetsCubit extends Cubit<PetsState> {
     try {
       emit(LoadingState());
       final result = await repository.addPet(pet);
-      if (result != null) {
-        _pets.add(pet);
-      }
+      _pets.add(result);
       emit(LoadedState(_pets));
     } catch (e) {
       emit(ErrorState());

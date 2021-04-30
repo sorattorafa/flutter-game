@@ -18,10 +18,16 @@ user = root
 password = masterykey
 port  = 3306
 ```
+
+### run backend migrations: 
+```bash 
+cd backend
+python3 src/migrations.py
+```
 ### run backend: 
 ```bash 
 cd backend
-python3 main.py
+python3 src/main.py
 ```
 ### References
 

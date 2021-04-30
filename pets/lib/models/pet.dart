@@ -13,6 +13,7 @@ class PetModel {
   int happy;
   int hungry;
   int sleep;
+  int life;
 
   PetModel({
     required this.name,
@@ -24,6 +25,7 @@ class PetModel {
     required this.happy,
     required this.hungry,
     required this.sleep,
+    required this.life,
   });
 
   PetModel petFromJson(String source) {
@@ -45,6 +47,7 @@ class PetModel {
         happy: json["happy"],
         hungry: json["hungry"],
         sleep: json["sleep"],
+        life: json["life"],
         state: PetState.fromJson(json),
       );
 
@@ -56,5 +59,6 @@ class PetModel {
         "hungry": hungry,
         "happy": happy,
         "sleep": sleep,
+        "life": life,
       };
 }
