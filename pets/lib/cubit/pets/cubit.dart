@@ -17,7 +17,11 @@ class PetsCubit extends Cubit<PetsState> {
       emit(LoadingState());
       final pets = await repository.listPetsByUser();
       _pets = pets;
-      emit(LoadedState(pets));
+      if (pets.length > 1) {
+        emit(LoadedState(pets));
+      } else {
+        emit(EmptyState());
+      }
     } catch (e) {
       emit(ErrorState());
     }

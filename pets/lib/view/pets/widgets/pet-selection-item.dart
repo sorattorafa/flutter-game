@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pets/cubit/pets/cubit.dart';
-import 'package:pets/models/pet.dart';
 import 'package:pets/providers/pets.dart';
 import 'package:pets/widgets/radio_button_item.dart';
 import 'package:provider/provider.dart';

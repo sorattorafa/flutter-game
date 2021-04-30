@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:pets/models/pet.dart';
 
-
 abstract class PetsState extends Equatable {}
 
 class InitialState extends PetsState {
@@ -10,6 +9,11 @@ class InitialState extends PetsState {
 }
 
 class LoadingState extends PetsState {
+  @override
+  List<Object> get props => [];
+}
+
+class EmptyState extends PetsState {
   @override
   List<Object> get props => [];
 }

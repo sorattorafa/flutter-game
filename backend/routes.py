@@ -18,7 +18,11 @@ class UsersSignUp(Resource):
         val = (email, password)
         mycursor.execute(sql, val)
         mydb.commit()
-        return {'hello': 'world'}
+        sql = "SELECT * FROM users WHERE email = %s AND password = %s"
+        adr = (email,password,)
+        mycursor.execute(sql, adr)
+        myresult = mycursor.fetchall()
+        return myresult
 
 class UsersLogin(Resource):
     def post(self):
@@ -26,11 +30,11 @@ class UsersLogin(Resource):
         email = data['email']
         password = data['password']
      
-        sql = "SELECT * FROM users WHERE email = %s AND password = %s"
+        sql = "SELECT id, email FROM users WHERE email = %s AND password = %s"
         adr = (email,password,)
         mycursor.execute(sql, adr)
 
         myresult = mycursor.fetchall()
         if(len(myresult) <= 0):
             raise InvalidUsage('User not found', status_code=404)
-        return {'hello': 'world'}
+        return myresult

@@ -12,14 +12,7 @@ class PetService {
     int page = 1,
     int limit = 20,
   }) async {
-    final petmodels = [
-      PetModel(
-          name: 'Rafa',
-          id: 1,
-          userId: 2,
-          imageUrl: 'assets/images/frog/happy.png',
-          color: Colors.lightGreen),
-    ];
+    final petmodels = [];
     return petmodels;
     /*
     final queryParameters = <String, dynamic>{

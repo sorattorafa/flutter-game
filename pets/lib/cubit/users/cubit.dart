@@ -23,8 +23,11 @@ class UserCubit extends Cubit<UserState> {
   Future<UserState> makeLogin(UserModel user) async {
     try {
       emit(LoadingState());
-      final userLogin = await repository.makeLogin(user.email, user.password!);
-      actualUser = userLogin;
+      final userLoginResult =
+          await repository.makeLogin(user.email, user.password!);
+      final userLogin = userLoginResult.elementAt(0);
+      actualUser =
+          UserModel(email: userLogin.elementAt(1), id: userLogin.elementAt(0));
       emit(LoadedState(actualUser));
       return LoginSucess();
     } catch (e) {
@@ -35,8 +38,11 @@ class UserCubit extends Cubit<UserState> {
   Future<UserState> createUser(UserModel user) async {
     try {
       emit(LoadingState());
-      final userLogin = await repository.createUser(user.email, user.password!);
-      actualUser = userLogin;
+      final userLoginResult =
+          await repository.createUser(user.email, user.password!);
+      final userLogin = userLoginResult.elementAt(0);
+      actualUser =
+          UserModel(email: userLogin.elementAt(1), id: userLogin.elementAt(0));
       emit(LoadedState(actualUser));
       return LoginSucess();
     } catch (e) {

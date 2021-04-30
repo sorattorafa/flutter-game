@@ -19,7 +19,7 @@ class _PetBuilderState extends State<PetBuilder> {
   void openPet(PetModel pet) {
     Navigator.pushNamed(context, '/petview', arguments: pet);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PetsCubit, PetsState>(
@@ -31,6 +31,12 @@ class _PetBuilderState extends State<PetBuilder> {
             ),
           );
         } else if (state is ErrorState) {
+          return SliverToBoxAdapter(
+            child: Center(
+              child: Icon(Icons.close),
+            ),
+          );
+        } else if (state is EmptyState) {
           return SliverToBoxAdapter(
             child: Center(
               child: Icon(Icons.close),
