@@ -34,6 +34,8 @@ class FormItem extends StatelessWidget {
         suffixIcon: suffix,
       ),
       controller: controller,
+      obscureText: formFieldName == 'password',
+      obscuringCharacter: '*',
     );
   }
 }

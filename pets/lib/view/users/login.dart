@@ -101,7 +101,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         ),
                         SizedBox(height: 12),
                         FormItem(
-                          formFieldName: 'senha',
+                          formFieldName: 'password',
                           controller: senhaController,
                         ),
                         Row(
