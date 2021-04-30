@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets/cubit/pets/cubit.dart';
 import 'package:pets/cubit/pets/state.dart';
 import 'package:pets/models/pet.dart';
+import 'package:pets/view/pets/widgets/new-pet-container.dart';
 import 'package:pets/view/pets/widgets/pet.dart';
 
 class PetBuilder extends StatefulWidget {
@@ -33,18 +34,27 @@ class _PetBuilderState extends State<PetBuilder> {
         } else if (state is ErrorState) {
           return SliverToBoxAdapter(
             child: Center(
-              child: Icon(Icons.close),
+              child: Column(children: [Icon(Icons.close)]),
             ),
           );
         } else if (state is EmptyState) {
           return SliverToBoxAdapter(
             child: Center(
-              child: Icon(Icons.close),
-            ),
+                child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    'Create your first pet',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+                NewPetWidget(),
+              ],
+            )),
           );
         } else if (state is LoadedState) {
           final pets = state.pets;
-
           return SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

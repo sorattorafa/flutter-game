@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets/cubit/pets/cubit.dart';
+import 'package:pets/cubit/pets/state.dart';
 import 'package:pets/cubit/users/cubit.dart';
 import 'package:pets/widgets/adaptative-refresh-indicator.dart';
 import 'package:pets/view/pets/widgets/pet-list-builder.dart';
@@ -15,7 +16,6 @@ class PetList extends StatefulWidget {
 }
 
 class _PetListState extends State<PetList> {
-
   UserCubit? userState;
   PetsCubit? petState;
 
@@ -45,17 +45,25 @@ class _PetListState extends State<PetList> {
             CupertinoSliverRefreshControl(
               onRefresh: () async {
                 setState(() {
-                  context.read<PetsCubit>().listPetsByUser(userState!.actualUser!.id!);
+                  context
+                      .read<PetsCubit>()
+                      .listPetsByUser(userState!.actualUser!.id!);
                 });
                 return Future.value(true);
               },
               builder: buildAdaptativeRefreshIndicator,
             ),
-            SliverToBoxAdapter(
-              child: Column(children: [
-                TotalPetsSection(),
-              ]),
-            ),
+            BlocBuilder<PetsCubit, PetsState>(builder: (context, state) {
+              if (state is LoadedState) {
+                return SliverToBoxAdapter(
+                  child: Center(
+                    child: TotalPetsSection(),
+                  ),
+                );
+              } else {
+                return SliverToBoxAdapter();
+              }
+            }),
             PetBuilder(),
           ],
         ),
