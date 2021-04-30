@@ -72,7 +72,11 @@ class _PetBuilderState extends State<PetBuilder> {
             ),
           );
         } else {
-          return Container();
+          return SliverToBoxAdapter(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         }
       },
     );

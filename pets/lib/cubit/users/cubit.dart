@@ -20,6 +20,10 @@ class UserCubit extends Cubit<UserState> {
     return error;
   }
 
+  void clearActualUser() {
+    actualUser = null;
+  }
+
   Future<UserState> makeLogin(UserModel user) async {
     try {
       emit(LoadingState());

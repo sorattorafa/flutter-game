@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets/cubit/pets/cubit.dart';
+import 'package:pets/cubit/users/cubit.dart';
 import 'package:pets/widgets/adaptative-refresh-indicator.dart';
 import 'package:pets/view/pets/widgets/pet-list-builder.dart';
 import 'package:pets/widgets/refresh-scroll-physics.dart';
@@ -14,14 +15,19 @@ class PetList extends StatefulWidget {
 }
 
 class _PetListState extends State<PetList> {
-  int selectedIndex = 0;
-  bool isInitializing = true;
+
+  UserCubit? userState;
+  PetsCubit? petState;
 
   @override
   void initState() {
     super.initState();
-
-    isInitializing = false;
+    Future.microtask(() async {
+      userState = Provider.of<UserCubit>(context, listen: false);
+      petState = Provider.of<PetsCubit>(context, listen: false);
+      final pets = await petState!.listPetsByUser(userState!.actualUser!.id!);
+      print(pets);
+    });
   }
 
   @override
@@ -36,16 +42,15 @@ class _PetListState extends State<PetList> {
         body: CustomScrollView(
           physics: const RefreshScrollPhysics(),
           slivers: <Widget>[
-            if (!isInitializing)
-              CupertinoSliverRefreshControl(
-                onRefresh: () async {
-                  setState(() {
-                    context.read<PetsCubit>().listPetsByUser();
-                  });
-                  return Future.value(true);
-                },
-                builder: buildAdaptativeRefreshIndicator,
-              ),
+            CupertinoSliverRefreshControl(
+              onRefresh: () async {
+                setState(() {
+                  context.read<PetsCubit>().listPetsByUser(userState!.actualUser!.id!);
+                });
+                return Future.value(true);
+              },
+              builder: buildAdaptativeRefreshIndicator,
+            ),
             SliverToBoxAdapter(
               child: Column(children: [
                 TotalPetsSection(),

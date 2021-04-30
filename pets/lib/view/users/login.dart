@@ -21,9 +21,6 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      print(context.read<UserCubit>().actualUser);
-    });
   }
 
   @override

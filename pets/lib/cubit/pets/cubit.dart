@@ -4,20 +4,19 @@ import 'package:pets/models/pet.dart';
 import 'package:pets/cubit/pets/repository.dart';
 
 class PetsCubit extends Cubit<PetsState> {
-  PetsCubit({required this.repository}) : super(InitialState()) {
-    listPetsByUser();
-  }
+  PetsCubit({required this.repository}) : super(InitialState());
 
   List<PetModel> _pets = [];
 
   final PetService repository;
 
-  void listPetsByUser() async {
+  Future<dynamic> listPetsByUser(int userId) async {
     try {
+      //  emit(LoadingState());
       emit(LoadingState());
-      final pets = await repository.listPetsByUser();
-      _pets = pets;
-      if (pets.length > 1) {
+      final pets = await repository.listPetsByUser(userId);
+      _pets = _pets.isNotEmpty ? _pets : pets;
+      if (pets.isNotEmpty) {
         emit(LoadedState(pets));
       } else {
         emit(EmptyState());

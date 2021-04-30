@@ -58,7 +58,7 @@ class Pets(Resource):
         hungry = data['hungry']
 
         if(name == None or imageUrl == None or userId == None or happy == None or sleep == None or hungry == None):
-            raise InvalidUsage('User not found', status_code=404)
+            raise InvalidUsage('Invalid body', status_code=400)
         sql = "INSERT INTO pets (name, image_url, user_id, happy, sleep, hungry) VALUES (%s, %s, %s, %s, %s, %s)"
         val = (name, imageUrl, userId, happy, sleep, hungry)
         mycursor.execute(sql, val)
@@ -72,7 +72,7 @@ class GetPetsByUser(Resource):
 
         #Retrieving single row
         sql = '''
-        SELECT pets.id, pets.image_url, pets.sleep, pets.happy, pets.hungry 
+        SELECT pets.id, pets.image_url, pets.sleep, pets.happy, pets.hungry, pets.name
         FROM users INNER JOIN pets ON users.id = pets.user_id 
         WHERE users.id = %s
         '''
