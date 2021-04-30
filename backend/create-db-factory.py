@@ -15,3 +15,16 @@ mycursor.execute("""CREATE TABLE users (
     password varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );""")
+
+mycursor.execute("""CREATE TABLE pets(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(100) NOT NULL,
+    user_id INT,
+    sleep INT,
+    hungry INT,
+    happy INT,
+    image_url varchar(100) NOT NULL,
+    CONSTRAINT fk_users
+    FOREIGN KEY (user_id) 
+        REFERENCES users(id)
+);""")

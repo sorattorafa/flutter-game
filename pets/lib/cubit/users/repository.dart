@@ -19,9 +19,9 @@ class UsersServices {
       return response.data;
     } on Object catch (error) {
       if (error is DioError) {
-        throw UsersServicesError.UNKNOWN_ERROR;
+        throw UsersServicesError.INVALID_CREDENTIALS;
       }
-      throw UsersServicesError.INVALID_CREDENTIALS;
+      throw UsersServicesError.UNKNOWN_ERROR;
     }
   }
 
@@ -36,9 +36,22 @@ class UsersServices {
       return response.data;
     } on Object catch (error) {
       if (error is DioError) {
-        throw UsersServicesError.UNKNOWN_ERROR;
+        throw UsersServicesError.INVALID_CREDENTIALS;
       }
-      throw UsersServicesError.INVALID_CREDENTIALS;
+      throw UsersServicesError.UNKNOWN_ERROR;
+    }
+  }
+
+  Future<dynamic> getPetsByUser(int userId) async {
+    try {
+      final response = await _dio.get('http://127.0.0.1:5000/user/pets');
+      print(response.data);
+      return response.data;
+    } on Object catch (error) {
+      if (error is DioError) {
+        throw UsersServicesError.INVALID_CREDENTIALS;
+      }
+      throw UsersServicesError.UNKNOWN_ERROR;
     }
   }
 }

@@ -6,7 +6,7 @@ import 'package:pets/models/user.dart';
 class UserCubit extends Cubit<UserState> {
   UserCubit({required this.repository}) : super(InitialState());
 
-  late UserModel actualUser;
+  UserModel? actualUser;
   final UsersServices repository;
 
   UserState returnError(Object e) {
@@ -28,7 +28,7 @@ class UserCubit extends Cubit<UserState> {
       final userLogin = userLoginResult.elementAt(0);
       actualUser =
           UserModel(email: userLogin.elementAt(1), id: userLogin.elementAt(0));
-      emit(LoadedState(actualUser));
+      emit(LoadedState(actualUser!));
       return LoginSucess();
     } catch (e) {
       return returnError(e);
@@ -43,7 +43,7 @@ class UserCubit extends Cubit<UserState> {
       final userLogin = userLoginResult.elementAt(0);
       actualUser =
           UserModel(email: userLogin.elementAt(1), id: userLogin.elementAt(0));
-      emit(LoadedState(actualUser));
+      emit(LoadedState(actualUser!));
       return LoginSucess();
     } catch (e) {
       return returnError(e);

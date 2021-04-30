@@ -37,15 +37,13 @@ class PetService {
     */
   }
 
-  Future<dynamic> addPet() async {
+  Future<dynamic> addPet(PetModel pet) async {
     try {
-      //   return Model.fromJson(response.data);
-      return PetModel(
-          name: 'Rafusco',
-          id: 1,
-          userId: 2,
-          imageUrl: 'assets/images/cat-solid.svg',
-          color: Colors.grey);
+      final petJson = pet.toJson();
+      print(petJson);
+      final response =
+          await _dio.post('http://127.0.0.1:5000/pets/post', data: petJson);
+      return response.data; 
     } on Object catch (error) {
       print(error);
       throw PetServiceError.UNKNOWN_ERROR;

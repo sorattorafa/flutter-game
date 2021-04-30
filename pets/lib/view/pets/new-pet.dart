@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pets/cubit/pets/cubit.dart';
+import 'package:pets/cubit/users/cubit.dart';
 import 'package:pets/models/pet.dart';
+import 'package:pets/providers/pets.dart';
 import 'package:pets/widgets/form-field.dart';
 import 'package:pets/view/pets/widgets/pet-selection-item.dart';
 
@@ -100,12 +102,17 @@ class _NewPetState extends State<NewPet> {
               padding: const EdgeInsets.all(12),
               child: ElevatedButton(
                   onPressed: () async {
+                    print(context.read<UserCubit>().actualUser!.id);
                     context.read<PetsCubit>().addPet(PetModel(
-                        name: 'Rafa',
-                        id: 1,
-                        userId: 2,
-                        imageUrl: 'assets/images/frog/happy.png',
-                        color: Colors.lightGreen));
+                          id: -1,
+                          name: nameController.text,
+                          userId: context.read<UserCubit>().actualUser!.id,
+                          imageUrl: context.read<PetsProvider>().selectedPet,
+                          color: Colors.lightGreen,
+                          happy: 100,
+                          hungry: 100,
+                          sleep: 100,
+                        ));
                     Navigator.pop(context);
                   },
                   child: Text('Create pet')),

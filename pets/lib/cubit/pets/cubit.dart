@@ -30,7 +30,10 @@ class PetsCubit extends Cubit<PetsState> {
   void addPet(PetModel pet) async {
     try {
       emit(LoadingState());
-      _pets.add(pet);
+      final result = await repository.addPet(pet);
+      if (result != null) {
+        _pets.add(pet);
+      }
       emit(LoadedState(_pets));
     } catch (e) {
       emit(ErrorState());

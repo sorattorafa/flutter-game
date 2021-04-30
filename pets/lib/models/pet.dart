@@ -5,19 +5,25 @@ import 'package:pets/models/state.dart';
 
 class PetModel {
   int id;
-  int userId;
+  int? userId;
   String name;
   String imageUrl;
   Color color;
   PetState? state;
+  int happy;
+  int hungry;
+  int sleep;
 
   PetModel({
     required this.name,
     required this.imageUrl,
     required this.id,
-    required this.userId,
+    this.userId,
     this.state,
     required this.color,
+    required this.happy,
+    required this.hungry,
+    required this.sleep,
   });
 
   PetModel petFromJson(String source) {
@@ -29,7 +35,6 @@ class PetModel {
     final data = source.toJson();
     return jsonEncode(data);
   }
-  
 
   factory PetModel.fromJson(Map<String, dynamic> json) => PetModel(
         name: json["name"],
@@ -37,15 +42,19 @@ class PetModel {
         id: json["id"],
         userId: json["user_id"],
         color: json["color"],
+        happy: json["happy"],
+        hungry: json["hungry"],
+        sleep: json["sleep"],
         state: PetState.fromJson(json),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
-        "imageUrl": imageUrl,
+        "image_url": imageUrl,
         "name": name,
-        "state": state!.toJson(),
+        "hungry": hungry,
+        "happy": happy,
+        "sleep": sleep,
       };
-      
 }
