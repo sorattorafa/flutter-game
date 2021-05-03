@@ -1,13 +1,18 @@
 import mysql.connector
 
-mydb = mysql.connector.connect(option_files='src/configs/env.config', option_groups=['connection_details'])
+mydb = mysql.connector.connect(
+    option_files='src/configs/env.config', option_groups=['connection_details'])
 
 mycursor = mydb.cursor()
 
-mycursor.execute("SHOW DATABASES")
+#mycursor.execute("SHOW DATABASES")
+# for x in mycursor:
+#    print(x)
 
-for x in mycursor:
-  print(x)
+sqlDrops = ['DROP TABLE IF EXISTS pets_clock', 'DROP TABLE IF EXISTS pets', 'DROP TABLE IF EXISTS users']
+
+for drop in sqlDrops:
+  mycursor.execute(drop)
 
 mycursor.execute("""CREATE TABLE users (
     id int NOT NULL AUTO_INCREMENT,
@@ -29,3 +34,16 @@ mycursor.execute("""CREATE TABLE pets(
     FOREIGN KEY (user_id) 
         REFERENCES users(id)
 );""")
+
+mycursor.execute("""
+CREATE TABLE pets_clock(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    last_sleep DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_eat DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_play DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    pet_id INT,
+    CONSTRAINT fk_pets
+    FOREIGN KEY (pet_id) 
+        REFERENCES pets(id)
+);
+""")
