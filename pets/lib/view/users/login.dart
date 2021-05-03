@@ -109,17 +109,19 @@ class _FirstScreenState extends State<FirstScreen> {
                           children: [
                             ElevatedButton(
                               onPressed: () async {
-                                FocusScopeNode currentFocus =
-                                    FocusScope.of(context);
-                                currentFocus.unfocus();
-                                final result = await context
-                                    .read<UserCubit>()
-                                    .makeLogin(UserModel(
-                                        email: emailController.text,
-                                        password: senhaController.text));
-                                if (result == LoginSucess()) {
-                                  Navigator.pushReplacementNamed(
-                                      context, '/second');
+                                if (_formKey.currentState!.validate()) {
+                                  FocusScopeNode currentFocus =
+                                      FocusScope.of(context);
+                                  currentFocus.unfocus();
+                                  final result = await context
+                                      .read<UserCubit>()
+                                      .makeLogin(UserModel(
+                                          email: emailController.text,
+                                          password: senhaController.text));
+                                  if (result == LoginSucess()) {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/second');
+                                  }
                                 }
                               }, //login,
                               child: Text('Login'),
@@ -130,14 +132,16 @@ class _FirstScreenState extends State<FirstScreen> {
                                 FocusScopeNode currentFocus =
                                     FocusScope.of(context);
                                 currentFocus.unfocus();
-                                final result = await context
-                                    .read<UserCubit>()
-                                    .createUser(UserModel(
-                                        email: emailController.text,
-                                        password: senhaController.text));
-                                if (result == LoginSucess()) {
-                                  Navigator.pushReplacementNamed(
-                                      context, '/second');
+                                if (_formKey.currentState!.validate()) {
+                                  final result = await context
+                                      .read<UserCubit>()
+                                      .createUser(UserModel(
+                                          email: emailController.text,
+                                          password: senhaController.text));
+                                  if (result == LoginSucess()) {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/second');
+                                  }
                                 }
                               },
                               child: Text('Sign up'),

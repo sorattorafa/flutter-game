@@ -23,6 +23,19 @@ class FormItem extends StatelessWidget {
         if (value == null || value.isEmpty) {
           return 'Please enter some correct $formFieldName';
         }
+        if (formFieldName == 'email') {
+          final isEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+              .hasMatch(value);
+          if(!isEmail){
+            return 'Please enter some correct email';
+          }
+        }
+        else if(formFieldName == 'password'){
+          final hasMinLength = value.length >= 6;
+          if(!hasMinLength){
+            return 'Plese enter some password with more than equal 6 characters';
+          }
+        }
         return null;
       },
       initialValue: initialValue,
