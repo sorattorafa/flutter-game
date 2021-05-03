@@ -36,6 +36,12 @@ class FormItem extends StatelessWidget {
             return 'Plese enter some password with more than equal 6 characters';
           }
         }
+        else if(formFieldName == 'pet name'){
+          final hasMinLength = value.length >= 2;
+          if(!hasMinLength){
+            return 'Plese enter some pet name with more than equal 2 characters';
+          }
+        }
         return null;
       },
       initialValue: initialValue,

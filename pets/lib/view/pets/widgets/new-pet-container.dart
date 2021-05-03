@@ -22,6 +22,8 @@ class NewPetWidget extends StatefulWidget {
 class _NewPetWidgetState extends State<NewPetWidget> {
   var nameController = TextEditingController(text: '');
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,17 +41,20 @@ class _NewPetWidgetState extends State<NewPetWidget> {
               ),
             ),
           ),
-          FormItem(
-            formFieldName: 'Pet name',
-            controller: nameController,
-            suffix: Visibility(
-              visible: true,
-              child: IconButton(
-                icon: const Icon(Icons.cancel),
-                color: Colors.purple.shade500,
-                onPressed: () {
-                  nameController = TextEditingController(text: '');
-                },
+          Form(
+            key: _formKey,
+            child: FormItem(
+              formFieldName: 'pet name',
+              controller: nameController,
+              suffix: Visibility(
+                visible: true,
+                child: IconButton(
+                  icon: const Icon(Icons.cancel),
+                  color: Colors.purple.shade500,
+                  onPressed: () {
+                    nameController = TextEditingController(text: '');
+                  },
+                ),
               ),
             ),
           ),
@@ -87,20 +92,22 @@ class _NewPetWidgetState extends State<NewPetWidget> {
             padding: const EdgeInsets.all(12),
             child: ElevatedButton(
                 onPressed: () async {
-                  print(context.read<UserCubit>().actualUser!.id);
-                  context.read<PetsCubit>().addPet(PetModel(
-                        id: -1,
-                        name: nameController.text,
-                        userId: context.read<UserCubit>().actualUser!.id,
-                        imageUrl: context.read<PetsProvider>().selectedPet,
-                        color: Colors.lightGreen,
-                        happy: 100,
-                        hungry: 100,
-                        sleep: 100,
-                        life: 100,
-                      ));
-                  if (widget.willPop) {
-                    Navigator.pop(context);
+                  //print(context.read<UserCubit>().actualUser!.id);
+                  if (_formKey.currentState!.validate()) {
+                    context.read<PetsCubit>().addPet(PetModel(
+                          id: -1,
+                          name: nameController.text,
+                          userId: context.read<UserCubit>().actualUser!.id,
+                          imageUrl: context.read<PetsProvider>().selectedPet,
+                          color: Colors.lightGreen,
+                          happy: 100,
+                          hungry: 100,
+                          sleep: 100,
+                          life: 100,
+                        ));
+                    if (widget.willPop) {
+                      Navigator.pop(context);
+                    }
                   }
                 },
                 child: Text('Create pet')),
