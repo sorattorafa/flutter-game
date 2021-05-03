@@ -104,6 +104,9 @@ class _NewPetWidgetState extends State<NewPetWidget> {
                           hungry: 100,
                           sleep: 100,
                           life: 100,
+                          lastEat: DateTime.now(),
+                          lastSleep: DateTime.now(),
+                          lastPlay: DateTime.now(),
                         ));
                     if (widget.willPop) {
                       Navigator.pop(context);

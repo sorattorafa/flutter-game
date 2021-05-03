@@ -14,6 +14,9 @@ class PetModel {
   int hungry;
   int sleep;
   int life;
+  DateTime lastSleep;
+  DateTime lastEat;
+  DateTime lastPlay;
 
   PetModel({
     required this.name,
@@ -26,6 +29,9 @@ class PetModel {
     required this.hungry,
     required this.sleep,
     required this.life,
+    required this.lastSleep,
+    required this.lastEat,
+    required this.lastPlay,
   });
 
   PetModel petFromJson(String source) {
@@ -48,6 +54,9 @@ class PetModel {
         hungry: json["hungry"],
         sleep: json["sleep"],
         life: json["life"],
+        lastEat: json["last_eat"],
+        lastPlay: json["last_play"],
+        lastSleep: json["last_sleep"],
         state: PetState.fromJson(json),
       );
 
@@ -60,5 +69,8 @@ class PetModel {
         "happy": happy,
         "sleep": sleep,
         "life": life,
+        "last_eat": lastEat,
+        "last_sleep": lastSleep,
+        "last_paly": lastPlay,
       };
 }
