@@ -120,7 +120,6 @@ class GetPetsByUser(Resource):
         response = []
 
         for result in myresult:
-            print(result)
             json_data = {
                 'id': result[0],
                 'image_url': result[1],
