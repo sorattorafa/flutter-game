@@ -118,6 +118,7 @@ class GetPetsByUser(Resource):
         mycursor.execute(sql, val)
         myresult = mycursor.fetchall()
         response = []
+        json_data =  {}
 
         for result in myresult:
             json_data = {
@@ -135,4 +136,6 @@ class GetPetsByUser(Resource):
                 'clean': result[11]
             }
         response.append(json_data)
-        return response  # myresult
+        if(myresult != []):
+            return response  # myresult
+        return None

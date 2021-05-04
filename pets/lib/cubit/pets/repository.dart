@@ -13,11 +13,13 @@ class PetService {
       List<PetModel> petmodels = [];
       final response =
           await _dio.get('http://127.0.0.1:5000/user/pets/$userId');
-      if (response.data.length > 0) {
+      if (response.data != null) {
         for (final data in response.data) {
-          petmodels.add(PetModel.fromJson(data));
+          print(['ola', data]);
+          final pet = PetModel.fromJson(data);
+          petmodels.add(pet);
         }
-      }
+      } else {}
       return petmodels;
     } on Object catch (error) {
       print(error);

@@ -18,7 +18,8 @@ class PetsCubit extends Cubit<PetsState> {
       emit(LoadingState());
       final pets = await repository.listPetsByUser(userId);
       _pets = _pets.isNotEmpty ? _pets : pets;
-      if (pets.isNotEmpty) {
+
+      if (_pets.isNotEmpty && _pets.elementAt(0).id != null) {
         emit(LoadedState(pets));
       } else {
         emit(EmptyState());
