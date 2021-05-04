@@ -14,9 +14,11 @@ class PetModel {
   int hungry;
   int sleep;
   int life;
-  DateTime lastSleep;
-  DateTime lastEat;
-  DateTime lastPlay;
+  int? clean;
+  String? lastSleep;
+  String? lastEat;
+  String? lastPlay;
+  String? lastBath;
 
   PetModel({
     required this.name,
@@ -32,6 +34,8 @@ class PetModel {
     required this.lastSleep,
     required this.lastEat,
     required this.lastPlay,
+    required this.lastBath,
+    required this.clean
   });
 
   PetModel petFromJson(String source) {
@@ -44,20 +48,21 @@ class PetModel {
     return jsonEncode(data);
   }
 
-  factory PetModel.fromJson(Map<String, dynamic> json) => PetModel(
+  factory PetModel.fromJson(dynamic json) => PetModel(
         name: json["name"],
         imageUrl: json["image_url"],
         id: json["id"],
         userId: json["user_id"],
-        color: json["color"],
+        color: Colors.green,
         happy: json["happy"],
         hungry: json["hungry"],
         sleep: json["sleep"],
         life: json["life"],
         lastEat: json["last_eat"],
-        lastPlay: json["last_play"],
         lastSleep: json["last_sleep"],
-        state: PetState.fromJson(json),
+        lastPlay: json["last_play"],
+        clean: json["clean"],
+        lastBath: json["last_bath"]
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,8 +74,5 @@ class PetModel {
         "happy": happy,
         "sleep": sleep,
         "life": life,
-        "last_eat": lastEat,
-        "last_sleep": lastSleep,
-        "last_paly": lastPlay,
       };
 }
