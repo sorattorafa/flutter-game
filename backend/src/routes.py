@@ -15,15 +15,6 @@ mycursor = mydb.cursor()
 
 # TODO:  check result before commit
 
-
-class DateTimeEncoder(json.JSONEncoder):
-    def default(self, z):
-        if isinstance(z, datetime.datetime):
-            return (str(z))
-        else:
-            return z
-
-
 class UsersSignUp(Resource):
     def post(self):
         data = request.get_json()
@@ -57,6 +48,49 @@ class UsersLogin(Resource):
         return myresult
 
 
+class UpdatePet(Resource):
+    def put(self, pet_id):
+        data = request.get_json()
+        sql = '''
+        UPDATE pets SET 
+            last_sleep = current_timestamp,
+            last_eat = current_timestamp, 
+            last_play = current_timestamp, 
+            last_bath = current_timestamp
+        WHERE id = %s
+        '''
+        adr = (pet_id,)
+        mycursor.execute(sql, adr)
+        myresult = mycursor.fetchall()
+
+        sql = '''
+        SELECT id, image_url, sleep, happy, hungry, name, life, last_eat, last_sleep, last_play, last_bath, clean
+        FROM pets
+        WHERE id = %s
+        '''
+
+        val = (pet_id,)
+        mycursor.execute(sql, val)
+        myresult = mycursor.fetchall()
+        result = myresult[0]
+        # this will extract row headers
+        json_data = {
+            'id': result[0],
+            'image_url': result[1],
+            'sleep': result[2],
+            'happy': result[3],
+            'hungry': result[4],
+            'name': result[5],
+            'life': result[6],
+            'last_eat': str(result[7]),
+            'last_sleep': str(result[8]),
+            'last_play': str(result[9]),
+            'last_bath': str(result[10]),
+            'clean': result[11]
+        }
+        return json_data
+
+        
 class Pets(Resource):
     def post(self):
         data = request.get_json()
@@ -96,10 +130,10 @@ class Pets(Resource):
             'hungry': result[4],
             'name': result[5],
             'life': result[6],
-            'last_eat': json.dumps(result[7], cls=DateTimeEncoder),
-            'last_sleep': json.dumps(result[8], cls=DateTimeEncoder),
-            'last_play': json.dumps(result[9], cls=DateTimeEncoder),
-            'last_bath': json.dumps(result[10], cls=DateTimeEncoder),
+            'last_eat': str(result[7]),
+            'last_sleep': str(result[8]),
+            'last_play': str(result[9]),
+            'last_bath': str(result[10]),
             'clean': result[11]
         }
         return json_data  # json.dumps(json_data,cls=DateTimeEncoder)
@@ -118,7 +152,7 @@ class GetPetsByUser(Resource):
         mycursor.execute(sql, val)
         myresult = mycursor.fetchall()
         response = []
-        json_data =  {}
+        json_data = {}
 
         for result in myresult:
             json_data = {
@@ -129,10 +163,10 @@ class GetPetsByUser(Resource):
                 'hungry': result[4],
                 'name': result[5],
                 'life': result[6],
-                'last_eat': json.dumps(result[7], cls=DateTimeEncoder),
-                'last_sleep': json.dumps(result[8], cls=DateTimeEncoder),
-                'last_play': json.dumps(result[9], cls=DateTimeEncoder),
-                'last_bath': json.dumps(result[10], cls=DateTimeEncoder),
+                'last_eat': str(result[7]),
+                'last_sleep': str(result[8]),
+                'last_play': str(result[9]),
+                'last_bath': str(result[10]),
                 'clean': result[11]
             }
         response.append(json_data)

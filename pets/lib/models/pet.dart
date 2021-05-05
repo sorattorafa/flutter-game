@@ -74,5 +74,9 @@ class PetModel {
         "happy": happy,
         "sleep": sleep,
         "life": life,
+        "last_eat": lastEat,
+        "last_bath": lastBath,
+        "last_sleep": lastSleep,
+        "last_play": lastPlay,
       };
 }

@@ -40,19 +40,19 @@ class _FirstScreenState extends State<FirstScreen> {
           title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Icon(
               FirstScreen.pets,
-              color: Colors.black,
+              color: Colors.white,
               size: 20.0,
               key: Key('icon2'),
             ),
             SizedBox(width: 5),
             Text(
               'Pets Game',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             SizedBox(width: 5),
             Icon(
               FirstScreen.pets,
-              color: Colors.black,
+              color: Colors.white,
               size: 20.0,
               key: Key('icon1'),
             ),

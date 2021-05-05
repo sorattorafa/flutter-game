@@ -39,6 +39,21 @@ class PetService {
       throw PetServiceError.UNKNOWN_ERROR;
     }
   }
+
+  Future<PetModel> updatePet(PetModel pet) async {
+    try {
+      final petJson = pet.toJson();
+      PetModel mypet;
+      final response =
+          await _dio.put('http://127.0.0.1:5000/pets/${pet.id}', data: petJson);
+      final data = response.data;
+      mypet = PetModel.fromJson(data);
+      return mypet;
+    } on Object catch (error) {
+      print(error);
+      throw PetServiceError.UNKNOWN_ERROR;
+    }
+  }
 }
 
 enum PetServiceError {

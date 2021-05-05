@@ -28,6 +28,7 @@ void main() {
       hungry: 100,
       sleep: 100,
       life: 100,
+      userId: 1
     ),
   ];
 

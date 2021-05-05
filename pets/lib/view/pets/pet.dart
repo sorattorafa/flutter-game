@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pets/cubit/pets/cubit.dart';
 import 'package:pets/models/pet.dart';
+import 'package:pets/view/pets/widgets/pet-expanded.dart';
 import 'package:pets/view/pets/widgets/pet.dart';
 import 'package:provider/provider.dart';
 
@@ -26,11 +27,12 @@ class _PetInfosState extends State<PetInfos> {
     final args = ModalRoute.of(context)!.settings.arguments as PetModel;
     final petState = Provider.of<PetsCubit>(context, listen: false);
     final petNumber = petState.getPetNumber(args.id);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Pet: numero: $petNumber',
-          style: TextStyle(color: Colors.black),
+          'Pet número $petNumber: ${args.name}',
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: Center(
@@ -39,7 +41,7 @@ class _PetInfosState extends State<PetInfos> {
             Container(
               width: 360,
               height: 360,
-              child: Pet(
+              child: PetExpanded(
                 pet: args,
                 size: 175,
               ),
