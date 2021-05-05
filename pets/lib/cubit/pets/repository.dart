@@ -1,6 +1,5 @@
 //import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:pets/models/pet.dart';
 
 class PetService {
@@ -15,7 +14,6 @@ class PetService {
           await _dio.get('http://127.0.0.1:5000/user/pets/$userId');
       if (response.data != null) {
         for (final data in response.data) {
-          print(['ola', data]);
           final pet = PetModel.fromJson(data);
           petmodels.add(pet);
         }
