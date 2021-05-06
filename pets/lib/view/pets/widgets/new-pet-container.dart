@@ -105,10 +105,7 @@ class _NewPetWidgetState extends State<NewPetWidget> {
                           sleep: 100,
                           life: 100,
                           clean: 100,
-                          lastEat: null,
-                          lastPlay: null,
-                          lastSleep: null,
-                          lastBath: null
+                          lastUpdated: null,
                           //lastEat: DateTime.now(),
                           // lastSleep: DateTime.now(),
                           // lastPlay: DateTime.now(),

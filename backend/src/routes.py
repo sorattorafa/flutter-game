@@ -51,20 +51,27 @@ class UsersLogin(Resource):
 class UpdatePet(Resource):
     def put(self, pet_id):
         data = request.get_json()
+        imageUrl = data['image_url']
+        happy = data['happy']
+        sleep = data['sleep']
+        hungry = data['hungry']
+        life = data['life']
+        
         sql = '''
         UPDATE pets SET 
-            last_sleep = current_timestamp,
-            last_eat = current_timestamp, 
-            last_play = current_timestamp, 
-            last_bath = current_timestamp
+            image_url = %s,
+            happy = %s, 
+            sleep = %s, 
+            hungry = %s,
+            life = %s
         WHERE id = %s
         '''
-        adr = (pet_id,)
+        adr = (imageUrl, happy, sleep, hungry, life, pet_id,)
         mycursor.execute(sql, adr)
         myresult = mycursor.fetchall()
 
         sql = '''
-        SELECT id, image_url, sleep, happy, hungry, name, life, last_eat, last_sleep, last_play, last_bath, clean
+        SELECT id, image_url, sleep, happy, hungry, name, life, last_updated, clean
         FROM pets
         WHERE id = %s
         '''
@@ -82,11 +89,8 @@ class UpdatePet(Resource):
             'hungry': result[4],
             'name': result[5],
             'life': result[6],
-            'last_eat': str(result[7]),
-            'last_sleep': str(result[8]),
-            'last_play': str(result[9]),
-            'last_bath': str(result[10]),
-            'clean': result[11]
+            'last_updated': str(result[7]),
+            'clean': result[8]
         }
         return json_data
 
@@ -112,7 +116,7 @@ class Pets(Resource):
         pet_id = mycursor.lastrowid
 
         sql = '''
-        SELECT id, image_url, sleep, happy, hungry, name, life, last_eat, last_sleep, last_play, last_bath, clean
+        SELECT id, image_url, sleep, happy, hungry, name, life, last_updated, clean
         FROM pets
         WHERE id = %s
         '''
@@ -130,11 +134,8 @@ class Pets(Resource):
             'hungry': result[4],
             'name': result[5],
             'life': result[6],
-            'last_eat': str(result[7]),
-            'last_sleep': str(result[8]),
-            'last_play': str(result[9]),
-            'last_bath': str(result[10]),
-            'clean': result[11]
+            'last_updated': str(result[7]),
+            'clean': result[8]
         }
         return json_data  # json.dumps(json_data,cls=DateTimeEncoder)
 
@@ -143,7 +144,7 @@ class GetPetsByUser(Resource):
     def get(self, user_id):
 
         sql = '''
-        SELECT pets.id, pets.image_url, pets.sleep, pets.happy, pets.hungry, pets.name, pets.life, pets.last_eat, pets.last_sleep, pets.last_play, pets.last_bath, pets.clean
+        SELECT pets.id, pets.image_url, pets.sleep, pets.happy, pets.hungry, pets.name, pets.life, pets.last_updated, pets.clean
         FROM users INNER JOIN pets ON users.id = pets.user_id
         WHERE users.id = %s
         '''
@@ -163,11 +164,8 @@ class GetPetsByUser(Resource):
                 'hungry': result[4],
                 'name': result[5],
                 'life': result[6],
-                'last_eat': str(result[7]),
-                'last_sleep': str(result[8]),
-                'last_play': str(result[9]),
-                'last_bath': str(result[10]),
-                'clean': result[11]
+                'last_updated': str(result[7]),
+                'clean': result[8]
             }
         response.append(json_data)
         if(myresult != []):

@@ -15,21 +15,17 @@ void main() {
 
   final pets = [
     PetModel(
-      name: 'Pet',
-      imageUrl: 'url',
-      clean: null,
-      id: 1,
-      color: Colors.green,
-      lastBath: null,
-      lastEat: null,
-      lastPlay: null,
-      lastSleep: null,
-      happy: 100,
-      hungry: 100,
-      sleep: 100,
-      life: 100,
-      userId: 1
-    ),
+        name: 'Pet',
+        imageUrl: 'url',
+        clean: null,
+        id: 1,
+        color: Colors.green,
+        lastUpdated: null,
+        happy: 100,
+        hungry: 100,
+        sleep: 100,
+        life: 100,
+        userId: 1),
   ];
 
   final user = UserModel(

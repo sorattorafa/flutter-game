@@ -58,7 +58,7 @@ class _PetState extends State<Pet> {
           data: returnSliverThemeData(Colors.red[700]!, Colors.red[100]!),
           child: Slider(
             min: 0,
-            max: 100,
+            max: 101,
             value: widget.pet.life.toDouble(),
             onChanged: (onchanged) {},
           ),

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets/cubit/pets/state.dart';
 import 'package:pets/models/pet.dart';
 import 'package:pets/cubit/pets/repository.dart';
+import 'dart:math';
 
 class PetsCubit extends Cubit<PetsState> {
   PetsCubit({required this.repository}) : super(InitialState());
@@ -67,28 +68,20 @@ class PetsCubit extends Cubit<PetsState> {
   get getPetsLength => _pets.length;
 
   Future<void> updatePetAttribute(PetModel updatedPet, PetModel _pet) async {
-    final lastEat = DateTime.parse(updatedPet.lastEat!);
-    final today = DateTime.now().toUtc();
-    final deltaTimeEat = today.subtract(Duration(
-        days: lastEat.day, hours: lastEat.hour, minutes: lastEat.minute));
-    final deltaTime = deltaTimeEat.hour + (deltaTimeEat.minute / 60);
-    final hungryVariation = (_pet.hungry * 0.8) * deltaTime;
+    final today = DateTime.now();
+    final lastUpdated = DateTime.parse(updatedPet.lastUpdated!);
 
-    final lastPlay = DateTime.parse(updatedPet.lastPlay!);
-    final deltaTimePlay = today.subtract(Duration(
-        days: lastPlay.day, hours: lastPlay.hour, minutes: lastPlay.minute));
-    final deltaTimePlayed = deltaTimePlay.hour + (deltaTimePlay.minute / 60);
-    final playVariation = (_pet.happy * 0.8) * deltaTimePlayed;
+    final deltaTime = (pow(lastUpdated.difference(today).inHours, 2) / 32);
 
-    final lastSleep = DateTime.parse(updatedPet.lastSleep!);
-    final deltaTimeSleep = today.subtract(Duration(
-        days: lastSleep.day, hours: lastSleep.hour, minutes: lastSleep.minute));
-    final deltaTimeSleeped = deltaTimeSleep.hour + (deltaTimeSleep.minute / 60);
-    final sleepVariation = (_pet.sleep * 0.8) * deltaTimeSleeped;
+    print(deltaTime);
 
-    _pet.hungry = _pet.hungry - hungryVariation.toInt();
-    _pet.happy = _pet.happy - playVariation.toInt();
-    _pet.sleep = _pet.sleep - sleepVariation.toInt();
+    final lifeVariation = (_pet.life * 0.9) * deltaTime;
+    final hungryVariation = (_pet.hungry * 1.1) * deltaTime;
+    final happyVariation = (_pet.happy * 0.95) * deltaTime;
+
+    _pet.hungry -= hungryVariation.toInt();
+    _pet.happy -= happyVariation.toInt();
+    _pet.life -= lifeVariation.toInt();
 
     await repository.updatePet(_pet);
   }

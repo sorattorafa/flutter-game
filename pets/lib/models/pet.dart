@@ -15,28 +15,21 @@ class PetModel {
   int sleep;
   int life;
   int? clean;
-  String? lastSleep;
-  String? lastEat;
-  String? lastPlay;
-  String? lastBath;
+  String? lastUpdated;
 
-  PetModel({
-    required this.name,
-    required this.imageUrl,
-    required this.id,
-    this.userId,
-    this.state,
-    required this.color,
-    required this.happy,
-    required this.hungry,
-    required this.sleep,
-    required this.life,
-    required this.lastSleep,
-    required this.lastEat,
-    required this.lastPlay,
-    required this.lastBath,
-    required this.clean
-  });
+  PetModel(
+      {required this.name,
+      required this.imageUrl,
+      required this.id,
+      this.userId,
+      this.state,
+      required this.color,
+      required this.happy,
+      required this.hungry,
+      required this.sleep,
+      required this.life,
+      required this.lastUpdated,
+      required this.clean});
 
   PetModel petFromJson(String source) {
     final json = jsonDecode(source);
@@ -49,21 +42,17 @@ class PetModel {
   }
 
   factory PetModel.fromJson(dynamic json) => PetModel(
-        name: json["name"],
-        imageUrl: json["image_url"],
-        id: json["id"],
-        userId: json["user_id"],
-        color: Colors.green,
-        happy: json["happy"],
-        hungry: json["hungry"],
-        sleep: json["sleep"],
-        life: json["life"],
-        lastEat: json["last_eat"],
-        lastSleep: json["last_sleep"],
-        lastPlay: json["last_play"],
-        clean: json["clean"],
-        lastBath: json["last_bath"]
-      );
+      name: json["name"],
+      imageUrl: json["image_url"],
+      id: json["id"],
+      userId: json["user_id"],
+      color: Colors.green,
+      happy: json["happy"],
+      hungry: json["hungry"],
+      sleep: json["sleep"],
+      life: json["life"],
+      lastUpdated: json["last_updated"],
+      clean: json["clean"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -74,9 +63,6 @@ class PetModel {
         "happy": happy,
         "sleep": sleep,
         "life": life,
-        "last_eat": lastEat,
-        "last_bath": lastBath,
-        "last_sleep": lastSleep,
-        "last_play": lastPlay,
+        "last_updated": lastUpdated,
       };
 }
