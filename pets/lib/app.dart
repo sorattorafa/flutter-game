@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets/cubit/loggedin-user/cubit.dart';
+import 'package:pets/cubit/loggedin-user/states.dart';
 import 'package:pets/cubit/pets/cubit.dart';
 import 'package:pets/cubit/users/cubit.dart';
 import 'package:pets/cubit/users/repository.dart';
@@ -48,7 +50,11 @@ class _PetsAppState extends State<PetsApp> {
               Dio(),
             ),
           ),
-        )
+        ),
+        BlocProvider<LoggedinUserProvider>(
+          create: (BuildContext context) =>
+              LoggedinUserProvider(BlocProvider.of<UserCubit>(context), null),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter pets',

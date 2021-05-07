@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets/cubit/loggedin-user/cubit.dart';
+import 'package:pets/cubit/loggedin-user/states.dart';
 import 'package:pets/cubit/users/cubit.dart';
 import 'package:pets/cubit/users/state.dart';
 import 'package:pets/models/user.dart';
@@ -133,12 +135,17 @@ class _FirstScreenState extends State<FirstScreen> {
                                     FocusScope.of(context);
                                 currentFocus.unfocus();
                                 if (_formKey.currentState!.validate()) {
-                                  final result = await context
-                                      .read<UserCubit>()
-                                      .createUser(UserModel(
+                                  final usersCubit =
+                                      context.read<UserCubit>();
+                                  final result =
+                                      await usersCubit.createUser(UserModel(
                                           email: emailController.text,
                                           password: senhaController.text));
                                   if (result == LoginSucess()) {
+                                    final loggedinUserProvider = context
+                                        .read<LoggedinUserProvider>();
+                                    loggedinUserProvider.userId =
+                                        usersCubit.actualUser!.id!;
                                     Navigator.pushReplacementNamed(
                                         context, '/second');
                                   }
@@ -150,12 +157,15 @@ class _FirstScreenState extends State<FirstScreen> {
                         ),
                         Visibility(
                             visible: state == ErrorState(),
-                            child: Text('Invalid credentials, please try again',
-                                style: TextStyle(color: Colors.red.shade700))),
+                            child: Text(
+                                'Invalid credentials, please try again',
+                                style:
+                                    TextStyle(color: Colors.red.shade700))),
                         Visibility(
                             visible: state == NetworkErrorState(),
                             child: Text('Network error, please try again',
-                                style: TextStyle(color: Colors.red.shade700)))
+                                style:
+                                    TextStyle(color: Colors.red.shade700)))
                       ],
                     ),
                   ),

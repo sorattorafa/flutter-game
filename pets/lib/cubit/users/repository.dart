@@ -35,6 +35,7 @@ class UsersServices {
       print(response.data);
       return response.data;
     } on Object catch (error) {
+      print(error);
       if (error is DioError) {
         throw UsersServicesError.INVALID_CREDENTIALS;
       }

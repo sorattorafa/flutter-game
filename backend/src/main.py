@@ -5,8 +5,11 @@ import pandas as pd
 import ast
 from routes import UsersLogin, UsersSignUp, Pets, GetPetsByUser, UpdatePet
 
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 api = Api(app)
 
 api.add_resource(UsersLogin, '/users/login')
