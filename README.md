@@ -15,7 +15,7 @@ Pets game made with Docker, Python, Mysql, and Flutter.
 host = localhost ou 127.0.0.0
 database = pets
 user = root
-password = masterykey
+password = mypass
 port  = 3306
 ```
 
