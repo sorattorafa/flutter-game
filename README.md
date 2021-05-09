@@ -7,7 +7,7 @@ Pets game made with Docker, Python, Mysql, and Flutter.
 
 ###  Run docker container with mysql8 using commands:
 
--  docker run -p 33060:3306 --name local-mysql -e MYSQL_ROOT_PASSWORD=masterkey -d mysql:8
+-  docker run -p 33060:3306 --name local-mysql -e MYSQL_ROOT_PASSWORD=mypass -d mysql:8
 
 ### Set config/env.config connection with docker image
 ```
