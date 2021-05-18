@@ -25,22 +25,27 @@ class PetsCubit extends Cubit<PetsState> {
     }
   }
 
-  Future<dynamic> listPetsByUser(int userId) async {
-    try {
-      emit(LoadingState());
-      final pets = await repository.listPetsByUser(userId);
+  Future<dynamic> listPetsByUser(int? userId) async {
+    if (userId == null) {
+      emit(EmptyState());
+      return;
+    } else {
+      try {
+        emit(LoadingState());
+        final pets = await repository.listPetsByUser(userId);
 
-      _pets = _pets.isNotEmpty ? _pets : pets;
-      if (_pets.isNotEmpty && pets.isNotEmpty) {
-        await updatePetsAttributes(_pets, pets);
+        _pets = pets;
+        if (_pets.isNotEmpty && pets.isNotEmpty) {
+          await updatePetsAttributes(_pets, pets);
+        }
+        if (_pets.isNotEmpty) {
+          emit(LoadedState(_pets));
+        } else {
+          emit(EmptyState());
+        }
+      } catch (e) {
+        emit(ErrorState());
       }
-      if (_pets.isNotEmpty) {
-        emit(LoadedState(_pets));
-      } else {
-        emit(EmptyState());
-      }
-    } catch (e) {
-      emit(ErrorState());
     }
   }
 
@@ -67,21 +72,40 @@ class PetsCubit extends Cubit<PetsState> {
 
   get getPetsLength => _pets.length;
 
+  double random() {
+    final list = [0.8, 0.85, 0.9, 0.95, 1.1, 1.2, 1.15];
+    list.shuffle();
+    return list.elementAt(0);
+  }
+
   Future<void> updatePetAttribute(PetModel updatedPet, PetModel _pet) async {
     final today = DateTime.now();
     final lastUpdated = DateTime.parse(updatedPet.lastUpdated!);
 
     final deltaTime = (pow(lastUpdated.difference(today).inHours, 2) / 32);
 
-    print(deltaTime);
-
-    final lifeVariation = (_pet.life * 0.9) * deltaTime;
-    final hungryVariation = (_pet.hungry * 1.1) * deltaTime;
-    final happyVariation = (_pet.happy * 0.95) * deltaTime;
+    final lifeVariation = (_pet.life * (random())) * deltaTime;
+    final hungryVariation = (_pet.hungry * random()) * deltaTime;
+    final happyVariation = (_pet.happy * random()) * deltaTime;
 
     _pet.hungry -= hungryVariation.toInt();
     _pet.happy -= happyVariation.toInt();
     _pet.life -= lifeVariation.toInt();
+    _pet.sleep -= lifeVariation.toInt();
+
+    if (_pet.happy <= 0 && _pet.happy <= 0 && _pet.hungry <= 0) {
+      _pet.state = 'dead';
+      _pet.petAction('kill');
+    } else if (_pet.life < 25) {
+      _pet.state = 'sick';
+      _pet.petAction('sick');
+    } else if (_pet.happy < 25) {
+      _pet.state = 'sad';
+      _pet.petAction('sick');
+    } else if (_pet.happy <= 40 && _pet.hungry < 40) {
+      _pet.state = 'tired';
+      _pet.petAction('tired');
+    }
 
     await repository.updatePet(_pet);
   }

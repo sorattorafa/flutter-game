@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:pets/models/state.dart';
 
 class PetModel {
   int id;
@@ -9,7 +9,7 @@ class PetModel {
   String name;
   String imageUrl;
   Color color;
-  PetState? state;
+  String? state;
   int happy;
   int hungry;
   int sleep;
@@ -36,6 +36,55 @@ class PetModel {
     return PetModel.fromJson(json);
   }
 
+  bool isFrog() => this.imageUrl.contains('frog');
+  bool isDog() => this.imageUrl.contains('dog');
+  bool isFish() => this.imageUrl.contains('fish');
+  bool isCat() => this.imageUrl.contains('cat');
+
+  void petAction(String action) {
+    if (action == 'kill') {
+      if (this.isCat()) {
+        this.imageUrl = 'assets/images/cat/dead.png';
+      } else if (this.isDog()) {
+        this.imageUrl = 'assets/images/dog/dead.png';
+      } else if (this.isFish()) {
+        this.imageUrl = 'assets/images/fish/dead.png';
+      } else if (this.isFrog()) {
+        this.imageUrl = 'assets/images/frog/dead.png';
+      }
+    } else if (action == 'sick') {
+      if (this.isCat()) {
+        this.imageUrl = 'assets/images/cat/sick.png';
+      } else if (this.isDog()) {
+        this.imageUrl = 'assets/images/dog/sick.png';
+      } else if (this.isFish()) {
+        this.imageUrl = 'assets/images/fish/sick.png';
+      } else if (this.isFrog()) {
+        this.imageUrl = 'assets/images/frog/sick.png';
+      }
+    } else if (action == 'sad') {
+      if (this.isCat()) {
+        this.imageUrl = 'assets/images/cat/sad.png';
+      } else if (this.isDog()) {
+        this.imageUrl = 'assets/images/dog/sad.png';
+      } else if (this.isFish()) {
+        this.imageUrl = 'assets/images/fish/sad.png';
+      } else if (this.isFrog()) {
+        this.imageUrl = 'assets/images/frog/sad.png';
+      }
+    } else if (action == 'tired') {
+      if (this.isCat()) {
+        this.imageUrl = 'assets/images/cat/tired.png';
+      } else if (this.isDog()) {
+        this.imageUrl = 'assets/images/dog/tired.png';
+      } else if (this.isFish()) {
+        this.imageUrl = 'assets/images/fish/tired.png';
+      } else if (this.isFrog()) {
+        this.imageUrl = 'assets/images/frog/tired.png';
+      }
+    }
+  }
+
   String petToJson(PetModel source) {
     final data = source.toJson();
     return jsonEncode(data);
@@ -47,6 +96,7 @@ class PetModel {
       id: json["id"],
       userId: json["user_id"],
       color: Colors.green,
+      state: "normal",
       happy: json["happy"],
       hungry: json["hungry"],
       sleep: json["sleep"],

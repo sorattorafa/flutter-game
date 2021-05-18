@@ -25,10 +25,8 @@ class _PetListState extends State<PetList> {
     Future.microtask(() async {
       userState = Provider.of<UserCubit>(context, listen: false);
       petState = Provider.of<PetsCubit>(context, listen: false);
-      if (userState?.actualUser?.id != null) {
-        final pets = await petState!.listPetsByUser(userState!.actualUser!.id!);
-        print(pets);
-      }
+      final pets = await petState!.listPetsByUser(userState?.actualUser?.id!);
+      print(pets);
     });
   }
 
