@@ -70,6 +70,9 @@ class _PetBuilderState extends State<PetBuilder> {
                   ),
                   onTap: () {
                     //   print(pet);
+                    if (pet.life <= 0) {
+                      return null;
+                    }
                     return openPet(pet);
                   },
                 );

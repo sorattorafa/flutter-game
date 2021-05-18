@@ -16,6 +16,7 @@ class PetModel {
   int life;
   int? clean;
   String? lastUpdated;
+  String? lastImageUrl;
 
   PetModel(
       {required this.name,
@@ -23,6 +24,7 @@ class PetModel {
       required this.id,
       this.userId,
       this.state,
+      this.lastImageUrl,
       required this.color,
       required this.happy,
       required this.hungry,
@@ -40,6 +42,31 @@ class PetModel {
   bool isDog() => this.imageUrl.contains('dog');
   bool isFish() => this.imageUrl.contains('fish');
   bool isCat() => this.imageUrl.contains('cat');
+
+  void petEat() {
+    this.life += 5;
+  }
+
+  void petClean() {
+    this.clean = this.clean! + 5;
+  }
+
+  void petSleep() {
+    if (this.imageUrl.contains('sleeping')) {
+      this.imageUrl = this.lastImageUrl!;
+    } else {
+      this.lastImageUrl = this.imageUrl;
+      if (this.isCat()) {
+        this.imageUrl = 'assets/images/cat/sleeping.png';
+      } else if (this.isDog()) {
+        this.imageUrl = 'assets/images/dog/sleeping.png';
+      } else if (this.isFish()) {
+        this.imageUrl = 'assets/images/fish/sleeping.png';
+      } else if (this.isFrog()) {
+        this.imageUrl = 'assets/images/frog/sleeping.png';
+      }
+    }
+  }
 
   void petAction(String action) {
     if (action == 'kill') {

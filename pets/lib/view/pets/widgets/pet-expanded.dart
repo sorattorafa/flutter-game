@@ -87,7 +87,11 @@ class _PetState extends State<PetExpanded> {
                 Container(
                   width: 70,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        widget.pet.petClean();
+                      });
+                    },
                     child: Icon(
                       Icons.bathtub_outlined,
                       size: 30,
@@ -97,7 +101,11 @@ class _PetState extends State<PetExpanded> {
                 Container(
                   width: 70,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        widget.pet.petSleep();
+                      });
+                    },
                     child: Icon(
                       Icons.nights_stay_outlined,
                       size: 30,

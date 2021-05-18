@@ -59,7 +59,7 @@ class _PetState extends State<Pet> {
           child: Slider(
             min: 0,
             max: 101,
-            value: widget.pet.life.toDouble(),
+            value: widget.pet.life <= 0 ? 0.1 : widget.pet.life.toDouble(),
             onChanged: (onchanged) {},
           ),
         ),
@@ -68,8 +68,8 @@ class _PetState extends State<Pet> {
           data: returnSliverThemeData(Colors.green[700]!, Colors.green[100]!),
           child: Slider(
             min: 0,
-            max: 100,
-            value: widget.pet.happy.toDouble(),
+            max: 101,
+            value: widget.pet.happy <= 0 ? 0.1 : widget.pet.happy.toDouble(),
             onChanged: (onchanged) {},
           ),
         ),
@@ -78,8 +78,8 @@ class _PetState extends State<Pet> {
           data: returnSliverThemeData(Colors.purple[700]!, Colors.purple[100]!),
           child: Slider(
             min: 0,
-            max: 100,
-            value: widget.pet.hungry.toDouble(),
+            max: 101,
+            value: widget.pet.hungry <= 0 ? 0.1 : widget.pet.hungry.toDouble(),
             onChanged: (onchanged) {},
           ),
         ),
@@ -88,8 +88,8 @@ class _PetState extends State<Pet> {
           data: returnSliverThemeData(Colors.blue[800]!, Colors.purple[100]!),
           child: Slider(
             min: 0,
-            max: 100,
-            value: widget.pet.sleep.toDouble(),
+            max: 101,
+            value: widget.pet.sleep <= 0 ? 0.1 : widget.pet.sleep.toDouble(),
             onChanged: (onchanged) {},
           ),
         ),
